@@ -6,7 +6,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import QuestionPage from './pages/QuestionPage';
 import CoursesPage from './pages/CoursesPage';
+import CourseCreatePage from './pages/CourseCreatePage';
 import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
 
 class App extends React.Component {
 
@@ -23,8 +25,10 @@ class App extends React.Component {
 
             <Switch>
               <Route path="/" exact component={QuestionPage} />
-              <Route path="/courses" component={CoursesPage} />
+              <Route path="/courses" exact component={CoursesPage} />
+              <Route path="/courses/create" exact component={CourseCreatePage} />
               <Route path="/sign-up" component={SignUpPage} />
+           <Route path="/login" component={LoginPage} />
             </Switch>
 
             <div className="full-width">

@@ -42,6 +42,11 @@
     font-size: 1.6rem;
   }
 
+  .course-grid {
+    grid-template-columns: 1fr;
+    /* grid-template-rows: auto auto auto auto auto; */
+  }
+
   .layout-grid {
     grid-template-columns: 1fr;
     /* grid-template-rows: auto auto auto auto auto; */
@@ -115,7 +120,8 @@
 
 .card {
   display: inline-block;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); */
+  border: 1px solid lightgrey;
   width: 130px;
   height: 180px;
   margin: 0 10px 10px 0;
@@ -159,9 +165,10 @@
 }
 
 .course-search {
-  height: 1.4rem;
+  height: 1.8rem;
   font-size: 1.05rem;
-  padding: 6px 10px 3px 0;
+  margin: 6px 10px 3px 0;
+  padding: 8px 5px 5px 5px;
   width: 100%;
   max-width: 300px;
   justify-self: end;
@@ -189,20 +196,33 @@ label {
   color: #444;
 }
 
-label + input {
-  display: block;
+form {
+  font-size: 1.05rem;
 }
 
 input,
-input:focus,
-input:active,
-input:enabled {
-  font-size: 1.05rem;
+select {
   width: 100%;
   font-weight: 100;
-  height: 1.4rem;
+  height: 2rem;
   padding: 5px;
   margin: 5px 0;
   border: 1px solid lightgrey;
   border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.passwords-match:active,
+.passwords-match:focus {
+  width: 100%;
+  font-weight: 100;
+  height: 2rem;
+  padding: 5px;
+  margin: 5px 0;
+  /* border-radius: 5px; */
+  box-shadow: 0 0 2px green;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid green;
+  outline: none;
 }
