@@ -1,0 +1,89 @@
+[
+  {
+    "question": "<p>Define an array of the numbers <code>1, 2 and 3</code> using <code>const</code> and square bracket notation</p>",
+    "initialSolution": "",
+    "completeSolution": "const arr = [1, 2, 3];",
+    "hint": "An array can be declared as follows:<br /><br /><code>const arrayName = ['A', 'B', 'C']",
+    "testCases": [
+      {
+        "description": "Use const",
+        "function": "return solution.includes('const')"
+      },
+      {
+        "description": "Use square bracket notation",
+        "function": "return solution.includes('[') && solution.includes(']')"
+      },
+      {
+        "description": "Correct Result",
+        "function": "return /const\\sarr\\s=\\s\\[1\\s?,\\s?2\\s?,\\s?3\\s?\\]/.test(solution.replace(/\\s+/, ' '))"
+      }
+    ]
+  },
+  {
+    "question": "<p>Add the digit <code>4</code> as the final item in the array <code>[1, 2, 3]</code>.</p>",
+    "initialSolution": "const arr = [1, 2, 3];",
+    "completeSolution": "const arr = [1, 2, 3];\n\narr.push(4);",
+    "hint": "The <code>push</code> method is used to add an item to the end of an array. Find out more about it <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push\">here.</a>",
+    "testCases": [
+      {
+        "description": "Use the correct method",
+        "function": "return solution.includes('push')"
+      },
+      {
+        "description": "Correct Result",
+        "function": "return /arr.push\\(4\\)/.test(solution)"
+      }
+    ]
+  },
+  {
+    "question": "<p>Sort the following array in descending order (from largest to smallest):</p><pre><code>const arr = [2, 1, 4, 3]</code></pre>",
+    "initialSolution": "const arr = [2, 1, 4, 3];\n\nconst reverseSort = (arr) => {\n\t// insert code here\n};\n\nreverseSort(arr);",
+    "completeSolution": "const arr = [2, 1, 4, 3];\n\nconst reverseSort = (arr) => {\n\treturn arr.sort().reverse();\n};\n\nreverseSort(arr);",
+    "hint": "JavaScript has built-in methods to handle sorting and reversing arrays.<br /><br />If you need a reminder, <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#Methods_2\" target=\"_blank\">click here</a>.",
+    "testCases": [
+      {
+        "description": "Use sort method",
+        "function": "return solution.includes('.sort()')"
+      },
+      {
+        "description": "Use reverse method",
+        "function": "return solution.includes('.reverse()')"
+      },
+      {
+        "description": "Correct result",
+        "function": "return isEqual(result, [4, 3, 2, 1])"
+      }
+    ]
+  },
+  {
+    "question": "<p>Use a <code>for</code> loop to create an array with values 1 to 10.</p>",
+    "initialSolution": "const createArray = () => {\n\tlet array = [];\n\t\/\/ insert code here\n};\n\ncreateArray();",
+    "completeSolution": "const createArray = () => {\n\tlet array = [];\n\tfor (let i = 0; i < 10; i++) {\n\t\tarray.push(i + 1);\n\t};\n\treturn array;\n};\n\ncreateArray();",
+    "hint": "<code>for</code> loops use the following syntax:<br /><br /><code>for (let i = 0; i &lt; num; i++)</code>",
+    "testCases": [
+      {
+        "description": "Use for loop",
+        "function": "return solution.includes('for(') || solution.includes('for (')"
+      },
+      {
+        "description": "Use push or unshift method",
+        "function": "return solution.includes('.push(') || solution.includes('.unshift(')"
+      },
+      {
+        "description": "Correct result",
+        "function": "return isEqual(result, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])"
+      }
+    ]
+  },
+  {
+    "question": "<p>Write a function to check whether a given array includes any item beginning with the letter 'A'. Your function should return a boolean.<br /><br />For example, the array <code>['Apple', 'Banana', 'Orange']</code> should return <code>true</code>.<br /><br />But the array <code>['Cat', 'Dog', 'Fish']</code> should return <code>false</code>.</p>",
+    "initialSolution": "const arr = ['Apple', 'Banana', 'Orange'];\n\nconst doesAnyItemBeginWithA = (arr) => {\n\t\/\/ insert code here\n};\n\ndoesAnyItemBeginWithA(arr);",
+    "completeSolution": "const arr = ['Apple', 'Banana', 'Orange'];\n\nconst doesAnyItemBeginWithA = (arr) => {\n\tlet res = false;\n\tarr.forEach(el => {\n\t\tif ((/^a/i).test(el)) res = true;\n\t});\n\treturn res;\n};\n\ndoesAnyItemBeginWithA(arr);",
+    "testCases": [
+      {
+        "description": "Correct result",
+        "function": "return result === true"
+      }
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "name": "online-coding-puzzles",
+  "version": "1.0.0",
+  "description": "A website to help people learn JavaScript",
+  "main": "server.js",
+  "author": "Bret Cameron <bretcameron@gmail.com>",
+  "license": "GPL",
+  "scripts": {
+    "start": "cd client && yarn start && cd ..",
+    "server": "nodemon .",
+    "dev": "concurrently \"yarn start\" \"yarn run server\""
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "concurrently": "^4.1.1",
+    "config": "^3.2.2",
+    "cors": "^2.8.5",
+    "cross-env": "^5.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.0-beta2",
+    "mongoose": "^5.6.6",
+    "mongoose-sequence": "^5.1.0",
+    "path": "^0.12.7",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

@@ -1,0 +1,19 @@
+reset should reset tests 
+
+on load, focus should be inside solution IDE
+
+
+
+1. lots of points(with cool animation), levels, badges and ranks to motivate people, with posh-looking certificates of completion
+2. some courses for free without signup (but signup to save your progress)
+3. some courses for free but only when signedup + email confirmation
+4. once got an audience and good content - some courses paid
+
+
+5. topics should include React --- no one has done something like this for React before
+5b. maybe also Angular, Vue, etc.
+
+
+6. Progress paths like in Duolinguo
+
+7. incorporate jasmine / enzyme for automated/random tests like codewars
