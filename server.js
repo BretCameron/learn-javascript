@@ -20,8 +20,6 @@ mongoose
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
-app.get('/', (req, res) => res.status(200).send('The server is live.'));
-
 app.use('/lessons', require('./routes/api/lessons'));
 
 // Serve static assets if in production
