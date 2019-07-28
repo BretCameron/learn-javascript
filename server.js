@@ -20,6 +20,7 @@ mongoose
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
+app.use('/courses', require('./routes/api/courses'));
 app.use('/lessons', require('./routes/api/lessons'));
 
 // Serve static assets if in production

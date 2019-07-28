@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import './App.css';
+import { Provider } from 'react-redux';
+import './App.scss';
 
+import store from './store';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import QuestionPage from './pages/QuestionPage';
@@ -15,28 +17,30 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Router>
-          <div className="layout-grid">
-            <div className="full-width">
-              <Link to="/">
-                <Header />
-              </Link>
+        <Provider store={store}>
+          <Router>
+            <div className="layout-grid">
+              <div className="full-width">
+                <Link to="/">
+                  <Header />
+                </Link>
+              </div>
+
+              <Switch>
+                <Route path="/" exact component={QuestionPage} />
+                <Route path="/courses" exact component={CoursesPage} />
+                <Route path="/courses/create" exact component={CourseCreatePage} />
+                <Route path="/sign-up" component={SignUpPage} />
+                <Route path="/login" component={LoginPage} />
+              </Switch>
+
+              <div className="full-width">
+                <Footer />
+              </div>
+
             </div>
-
-            <Switch>
-              <Route path="/" exact component={QuestionPage} />
-              <Route path="/courses" exact component={CoursesPage} />
-              <Route path="/courses/create" exact component={CourseCreatePage} />
-              <Route path="/sign-up" component={SignUpPage} />
-           <Route path="/login" component={LoginPage} />
-            </Switch>
-
-            <div className="full-width">
-              <Footer />
-            </div>
-
-          </div>
-        </Router>
+          </Router>
+        </Provider>
       </>
     );
   }

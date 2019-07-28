@@ -1,3 +1,17 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 .container {
   display: block;
   padding: 0 20px;
@@ -106,6 +120,18 @@
   cursor: pointer;
 }
 
+input[type='submit'] {
+  min-width: 150px;
+  box-sizing: border-box;
+  background: #3398ff;
+  border: 2px solid #3398ff;
+  font-size: 0.95rem;
+  color: white;
+  min-height: 2.4rem;
+  margin: 5px 5px 0 0;
+  cursor: pointer;
+}
+
 .secondaryButton {
   min-width: 150px;
   box-sizing: border-box;
@@ -202,14 +228,26 @@ form {
 
 input,
 select {
-  width: 100%;
   font-weight: 100;
+  width: 100%;
   height: 2rem;
   padding: 5px;
   margin: 5px 0;
   border: 1px solid lightgrey;
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+textarea {
+  font-family: sans-serif;
+  width: 100%;
+  height: calc(100% - 2rem);
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  box-sizing: border-box;
+  resize: none;
 }
 
 .passwords-match:active,
@@ -225,4 +263,81 @@ select {
   margin: 5px 1px 3px 0px;
   border: 1px solid green;
   outline: none;
+}
+
+.course-create-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 25px 40px;
+}
+
+// Loader
+
+.lds-grid {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-grid div {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: grey;
+  animation: lds-grid 1.2s linear infinite;
+}
+.lds-grid div:nth-child(1) {
+  top: 6px;
+  left: 6px;
+  animation-delay: 0s;
+}
+.lds-grid div:nth-child(2) {
+  top: 6px;
+  left: 26px;
+  animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(3) {
+  top: 6px;
+  left: 45px;
+  animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(4) {
+  top: 26px;
+  left: 6px;
+  animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(5) {
+  top: 26px;
+  left: 26px;
+  animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(6) {
+  top: 26px;
+  left: 45px;
+  animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(7) {
+  top: 45px;
+  left: 6px;
+  animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(8) {
+  top: 45px;
+  left: 26px;
+  animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(9) {
+  top: 45px;
+  left: 45px;
+  animation-delay: -1.6s;
+}
+@keyframes lds-grid {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }

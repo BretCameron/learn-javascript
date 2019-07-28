@@ -1,0 +1,3 @@
+export const GET_COURSES = 'GET_COURSES';
+export const COURSES_LOADING = 'COURSES_LOADING';
+export const CREATE_COURSE = 'CREATE_COURSE';

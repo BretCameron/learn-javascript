@@ -1,30 +1,28 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
+import { getCourses } from '../actions/courseActions';
 import CourseCard from '../components/CourseCard';
+import Loader from '../components/Loader';
 
-export default class CoursesPage extends Component {
+class CoursesPage extends Component {
   state = {
     data: [],
     search: ''
   }
 
   componentDidMount = () => {
-    axios.get('lessons/courses')
-      .then(res => {
-        this.setState({ data: res.data })
-      })
-      .catch(err => console.log(err))
+    this.props.getCourses();
   }
 
   handleSearch = (e) => {
     this.setState({ search: e.currentTarget.value })
   }
 
-  getCourses = () => {
-    const { data, search } = this.state;
+  getCourses = (items) => {
+    const { search } = this.state;
     const regex = new RegExp(search, 'i');
-    return data.map((el, i) => {
+    return items.map((el, i) => {
       return <CourseCard key={i} name={el.name} style={{
         display: regex.test(el.name) ? 'inline-block' : 'none'
       }}
@@ -33,6 +31,7 @@ export default class CoursesPage extends Component {
   }
 
   render() {
+    const { courses, loading } = this.props.course;
     return (
       <div style={{ width: '100%', padding: '40px 0' }}>
         <div className="container">
@@ -41,10 +40,16 @@ export default class CoursesPage extends Component {
             <input type="text" id="course-search" onChange={this.handleSearch} placeholder="Search" className="course-search" />
           </div>
           <div className="course-cards">
-            {this.getCourses()}
+            {loading ? <Loader /> : this.getCourses(courses)}
           </div>
         </div>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  course: state.course
+});
+
+export default connect(mapStateToProps, { getCourses })(CoursesPage);
