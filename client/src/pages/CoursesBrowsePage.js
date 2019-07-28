@@ -5,7 +5,7 @@ import { getCourses } from '../actions/courseActions';
 import CourseCard from '../components/CourseCard';
 import Loader from '../components/Loader';
 
-class CoursesPage extends Component {
+class CoursesBrowsePage extends Component {
   state = {
     data: [],
     search: ''
@@ -52,4 +52,4 @@ const mapStateToProps = (state) => ({
   course: state.course
 });
 
-export default connect(mapStateToProps, { getCourses })(CoursesPage);
+export default connect(mapStateToProps, { getCourses })(CoursesBrowsePage);
