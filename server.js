@@ -22,6 +22,7 @@ mongoose
 
 app.use('/courses', require('./routes/api/courses'));
 app.use('/lessons', require('./routes/api/lessons'));
+app.use('/users', require('./routes/api/users'));
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

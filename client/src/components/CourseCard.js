@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 
 export default class CourseCard extends Component {
   render() {
-    const { name, 
+    const { name,
       // difficulty, 
       // summary, 
-      tags, 
+      tags,
       style } = this.props;
     return (
       <div className="card" style={style}>

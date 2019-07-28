@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import courseReducer from './courseReducer';
+import authReducer from './authReducer';
 
 export default combineReducers({
-  course: courseReducer
+  course: courseReducer,
+  auth: authReducer
 })
