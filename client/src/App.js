@@ -10,6 +10,7 @@ import QuestionPage from './pages/QuestionPage';
 import CoursePage from './pages/CoursePage';
 import CoursesBrowsePage from './pages/CoursesBrowsePage';
 import CourseCreatePage from './pages/CourseCreatePage';
+import CourseEditPage from './pages/CourseEditPage';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 
@@ -31,6 +32,7 @@ class App extends React.Component {
                 <Route path="/" exact component={QuestionPage} />
                 <Route path="/courses" exact component={CoursesBrowsePage} />
                 <Route path="/courses/create" exact component={CourseCreatePage} />
+                <Route path="/courses/edit/:courseId" exact component={CourseEditPage} />
                 <Route path="/courses/:courseId" exact component={CoursePage} />
                 <Route path="/sign-up" component={SignUpPage} />
                 <Route path="/login" component={LoginPage} />
