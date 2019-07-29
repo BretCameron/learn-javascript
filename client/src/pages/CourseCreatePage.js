@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { createCourse } from '../actions/courseActions';
+import SeeAllCourses from '../components/links/SeeAllCourses';
 
 class CourseCreatePage extends Component {
   state = {
@@ -50,6 +51,7 @@ class CourseCreatePage extends Component {
     return (
       <div style={{ width: '100%', padding: '40px 0' }}>
         <div className="container">
+          <SeeAllCourses />
           <h1>Create a Course</h1>
           <br />
           <form method="POST">

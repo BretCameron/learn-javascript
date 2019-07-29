@@ -11,6 +11,13 @@ router.get('/', (req, res) => {
     .then(items => res.json(items));
 });
 
+// Get specific course by ID
+router.get('/:courseId', (req, res) => {
+  Course.findById(req.params.courseId)
+    .then(items => res.json(items))
+    .catch(err => console.log(err));
+});
+
 router.post('/create', (req, res) => {
   const newCourse = new Course({
     name: req.body.courseName,

@@ -1,12 +1,24 @@
 import axios from 'axios';
-import { GET_COURSES, COURSES_LOADING, CREATE_COURSE } from './types';
+import { GET_COURSE, GET_COURSES, COURSES_LOADING, CREATE_COURSE } from './types';
 
 export const getCourses = () => dispatch => {
   dispatch(setItemsLoading());
-  axios.get('lessons/courses')
+  axios.get('/courses')
     .then(res =>
       dispatch({
         type: GET_COURSES,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err))
+}
+
+export const getCourseById = (courseId) => dispatch => {
+  dispatch(setItemsLoading());
+  axios.get(`http://localhost:5000/courses/${courseId}`)
+    .then(res =>
+      dispatch({
+        type: GET_COURSE,
         payload: res.data
       })
     )

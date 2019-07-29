@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import CreateNewCourse from '../components/links/CreateNewCourse';
+
 import { getCourses } from '../actions/courseActions';
 import CourseCard from '../components/CourseCard';
 import Loader from '../components/Loader';
@@ -23,7 +25,7 @@ class CoursesBrowsePage extends Component {
     const { search } = this.state;
     const regex = new RegExp(search, 'i');
     return items.map((el, i) => {
-      return <CourseCard key={i} name={el.name} difficulty={el.difficulty} summary={el.summary} tags={el.tags} style={{
+      return <CourseCard key={el._id} id={el._id} name={el.name} difficulty={el.difficulty} summary={el.summary} tags={el.tags} style={{
         display: regex.test(el.name) ? 'inline-block' : 'none'
       }}
       />
@@ -39,6 +41,9 @@ class CoursesBrowsePage extends Component {
             <h1>Choose a course</h1>
             <input type="text" id="course-search" onChange={this.handleSearch} placeholder="Search" className="course-search" />
           </div>
+
+          <CreateNewCourse />
+
           <div className="course-cards">
             {loading ? <Loader /> : this.getCourses(courses)}
           </div>

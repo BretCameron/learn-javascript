@@ -51,9 +51,21 @@ class SignUpPage extends Component {
   }
 
   render() {
-    const { firstName, lastName, email, isEmail, password, passwordValid, showPassword, confirmPassword, newsletter, message } = this.state;
+    const { 
+      firstName, 
+      lastName, 
+      email, 
+      // isEmail, 
+      password, 
+      // passwordValid, 
+      showPassword, 
+      confirmPassword, 
+      newsletter, 
+      // message 
+    } = this.state;
     return (
-      <div style={{ width: '100%', padding: '40px 0' }}>
+      <div style={{ width: '100%', 
+      padding: '40px 0' }}>
         <div className="container">
           <h1>Sign Up</h1>
           <form type="POST">

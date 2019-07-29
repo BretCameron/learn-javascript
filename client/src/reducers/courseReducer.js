@@ -1,12 +1,19 @@
-import { GET_COURSES, COURSES_LOADING, CREATE_COURSE } from '../actions/types';
+import { GET_COURSE, GET_COURSES, COURSES_LOADING, CREATE_COURSE } from '../actions/types';
 
 const initialState = {
+  course: {},
   courses: [],
   loading: false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case GET_COURSE:
+      return {
+        ...state,
+        course: action.payload,
+        loading: false
+      }
     case GET_COURSES:
       return {
         ...state,
