@@ -6,6 +6,7 @@ import SeeAllCourses from '../components/links/SeeAllCourses';
 import EditCourse from '../components/links/EditCourse';
 import DuplicateCourse from '../components/links/DuplicateCourse';
 import CourseCard from '../components/CourseCard';
+import LessonCard from '../components/LessonCard';
 
 class CoursePage extends Component {
   componentDidMount = () => {
@@ -40,6 +41,10 @@ class CoursePage extends Component {
             )
           }) : ''}
           <p>{description}</p>
+          <br /><br /><br />
+          {[1, 2, 3].map((el, i) => {
+            return <LessonCard key={i} number={i} />
+          })}
           <br /><br /><br />
           <h2>Similar Courses</h2>
           {courses.map((el, i) => {

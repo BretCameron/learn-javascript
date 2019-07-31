@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { createCourse, updateCourse, deleteCourse } from '../../actions/courseActions';
 import DeleteModal from '../DeleteModal';
+import UploadImage from './UploadImage';
 // import SeeAllCourses from '../links/SeeAllCourses';
 
 class CourseForm extends Component {
@@ -122,6 +123,7 @@ class CourseForm extends Component {
       <div>
         {this.renderRedirect()}
         {modal ? <DeleteModal name={name} deleteCourse={this.deleteCourseSubmit} toggleModal={this.toggleModal} /> : ''}
+        <UploadImage /><br /><br /><br />
         <form method="POST">
           <div className="course-create-grid">
             <div>

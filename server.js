@@ -2,11 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const config = require('config');
+const fileUpload = require('express-fileupload');
 const cors = require('cors');
 
 const app = express();
 
 app.use(express.json());
+app.use(fileUpload());
 app.use(cors());
 
 const db = config.get('mongoURI');
@@ -21,6 +23,7 @@ mongoose
   .catch(err => console.log(err));
 
 app.use('/courses', require('./routes/api/courses'));
+app.use('/images', require('./routes/api/images'));
 app.use('/lessons', require('./routes/api/lessons'));
 app.use('/users', require('./routes/api/users'));
 

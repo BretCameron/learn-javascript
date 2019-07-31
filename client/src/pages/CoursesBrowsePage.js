@@ -6,6 +6,7 @@ import CreateNewCourse from '../components/links/CreateNewCourse';
 import { getCourses } from '../actions/courseActions';
 import CourseCard from '../components/CourseCard';
 import Loader from '../components/Loader';
+import Hero from '../components/Hero';
 
 class CoursesBrowsePage extends Component {
   state = {
@@ -36,6 +37,7 @@ class CoursesBrowsePage extends Component {
     const { courses, loading } = this.props.course;
     return (
       <div style={{ width: '100%', padding: '40px 0' }}>
+        <Hero />
         <div className="container">
           <div className="title-with-search">
             <h1>Choose a course</h1>
