@@ -1,4 +1,4 @@
-import { GET_COURSE, GET_COURSES, COURSES_LOADING, CREATE_COURSE } from '../actions/types';
+import { GET_COURSE, GET_COURSES, COURSES_LOADING, CREATE_COURSE, UPDATE_COURSE, DELETE_COURSE } from '../actions/types';
 
 const initialState = {
   course: {},
@@ -24,6 +24,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         courses: [action.payload, ...state.courses]
+      }
+    case UPDATE_COURSE:
+      return {
+        ...state,
+        course: action.payload
+      }
+    case DELETE_COURSE:
+      return {
+        ...state,
+        courses: state.courses.filter(course => course._id !== action.payload)
       }
     case COURSES_LOADING:
       return {

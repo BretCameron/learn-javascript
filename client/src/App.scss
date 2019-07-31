@@ -136,6 +136,21 @@ input[type='submit'] {
   cursor: pointer;
 }
 
+input[type='submit'].warning {
+  width: auto;
+  background: white;
+  color: red;
+  border: 2px solid red;
+  transition: 200ms ease-out;
+}
+
+input[type='submit'].warning:hover {
+background: red;
+color: white;
+border: 2px solid darkred;
+}
+
+
 .secondaryButton {
   min-width: 150px;
   box-sizing: border-box;
@@ -359,3 +374,4 @@ textarea {
     opacity: 0.5;
   }
 }
+

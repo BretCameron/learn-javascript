@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { createCourse } from '../../actions/courseActions';
+import { createCourse, updateCourse, deleteCourse } from '../../actions/courseActions';
 // import SeeAllCourses from '../links/SeeAllCourses';
 
 class CourseForm extends Component {
@@ -10,11 +10,11 @@ class CourseForm extends Component {
     courseDifficulty: 'beginner',
     courseName: '',
     courseSummary: '',
-    courseTags: [''],
+    courseTags: [],
     message: ''
   }
 
-  handleSubmit = (e) => {
+  createCourseSubmit = (e) => {
     e.preventDefault();
     const { courseDescription,
       courseDifficulty,
@@ -36,6 +36,35 @@ class CourseForm extends Component {
     }
   }
 
+  updateCourseSubmit = (e) => {
+    e.preventDefault();
+    const { courseId } = this.props;
+    const { courseDescription,
+      courseDifficulty,
+      courseName,
+      courseSummary,
+      courseTags } = this.state;
+    const updatedCourse = {
+      name: courseName,
+      summary: courseSummary,
+      description: courseDescription,
+      difficulty: courseDifficulty,
+      tags: courseTags,
+    }
+    try {
+      this.props.updateCourse(courseId, updatedCourse);
+      this.setState({ message: 'Course updated successfully!' })
+    } catch (err) {
+      this.setState({ message: `There was an error: ${err.message}` })
+    }
+  }
+
+  deleteCourseSubmit = (e) => {
+    e.preventDefault();
+    const { courseId } = this.props;
+    this.props.deleteCourse(courseId);
+  }
+
   updateInput = (e) => {
     switch (e.currentTarget.id) {
       case 'courseTags':
@@ -48,13 +77,13 @@ class CourseForm extends Component {
   }
 
   render() {
-    const {
-      courseDescription,
-      courseDifficulty,
-      courseName,
-      courseSummary,
-      courseTags
-    } = this.state;
+    // const {
+    // courseDescription,
+    // courseDifficulty,
+    // courseName,
+    // courseSummary,
+    // courseTags
+    // } = this.state;
     const {
       name,
       difficulty,
@@ -78,18 +107,18 @@ class CourseForm extends Component {
             </div>
             <div>
               <label htmlFor="courseSummary">Short Summary*<em>(60 characters)</em></label>
-              <input onChange={this.updateInput} id="courseSummary" name="courseSummary" type="text" value={summary} />
+              <input onChange={this.updateInput} id="courseSummary" name="courseSummary" type="text" defaultValue={summary} />
             </div>
             <div style={{
               gridColumn: '2',
               gridRow: '2 / 4'
             }}>
               <label htmlFor="courseDescription">Description</label>
-              <textarea onChange={this.updateInput} id="courseDescription" name="courseDescription" value={description} />
+              <textarea onChange={this.updateInput} id="courseDescription" name="courseDescription" defaultValue={description} />
             </div>
             <div>
               <label htmlFor="courseDifficulty">Course Difficulty*</label>
-              <select onChange={this.updateInput} id="courseDifficulty" name="courseDifficulty" value={difficulty} >
+              <select onChange={this.updateInput} id="courseDifficulty" name="courseDifficulty" defaultValue={difficulty} >
                 <option value="beginner">Beginner</option>
                 <option value="intermediate">Intermediate</option>
                 <option value="advanced">Advanced</option>
@@ -97,12 +126,16 @@ class CourseForm extends Component {
             </div>
             <div>
               <label htmlFor="courseTags">Tags <em>(separate with a comma)</em></label>
-              <input onChange={this.updateInput} id="courseTags" name="courseTags" type="text" value={tags} />
+              <input onChange={this.updateInput} id="courseTags" name="courseTags" type="text" defaultValue={tags} />
             </div>
             <div>
-              {courseId ? '' : <input onClick={this.handleSubmit} type="submit" value="Create Course" />}
+              <input onClick={courseId ? this.updateCourseSubmit : this.createCourseSubmit} type="submit" value={courseId ? 'Update Course' : 'Create Course'} />
               <br />
-              <p style={{ fontSize: '0.95rem', fontStyle: 'italic' }}>{this.state.message}</p>
+              <p style={{ fontSize: '0.95rem', fontStyle: 'italic' }}>
+                {this.state.message}</p>
+            </div>
+            <div style={{ display: courseId ? 'block' : 'none' }}>
+              <input type="submit" value="Delete Course" className="warning" onClick={this.deleteCourseSubmit} />
             </div>
           </div>
         </form>
@@ -115,4 +148,4 @@ const mapStateToProps = (state) => ({
   course: state.course
 });
 
-export default connect(mapStateToProps, { createCourse })(CourseForm);
+export default connect(mapStateToProps, { createCourse, updateCourse, deleteCourse })(CourseForm);
