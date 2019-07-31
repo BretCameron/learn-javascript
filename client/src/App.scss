@@ -82,6 +82,8 @@ a {
 
 .modal-background {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
@@ -144,12 +146,23 @@ input[type='submit'].warning {
   transition: 200ms ease-out;
 }
 
-input[type='submit'].warning:hover {
-background: red;
-color: white;
-border: 2px solid darkred;
+input[type='submit'].inactive,
+input[type='submit'].inactive:focus,
+input[type='submit'].inactive:hover {
+  width: auto;
+  cursor: not-allowed;
+  background: #eee;
+  color: darkgrey;
+  border: 2px solid lightgrey;
+  outline: 0;
+  transition: 200ms ease-out;
 }
 
+input[type='submit'].warning:hover {
+  background: red;
+  color: white;
+  border: 2px solid darkred;
+}
 
 .secondaryButton {
   min-width: 150px;
@@ -174,7 +187,13 @@ border: 2px solid darkred;
     object-fit: cover;
   }
 
-  h1, h2, h3, h4, h5, h6, p {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
     padding: 0 5px;
   }
 
@@ -374,4 +393,3 @@ textarea {
     opacity: 0.5;
   }
 }
-

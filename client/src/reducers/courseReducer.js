@@ -23,7 +23,8 @@ export default function (state = initialState, action) {
     case CREATE_COURSE:
       return {
         ...state,
-        courses: [action.payload, ...state.courses]
+        courses: [action.payload, ...state.courses],
+        course: action.payload
       }
     case UPDATE_COURSE:
       return {

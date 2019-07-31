@@ -31,15 +31,27 @@ export const setItemsLoading = () => {
   }
 }
 
-export const createCourse = (course) => dispatch => {
-  axios.post('create', course)
-    .then(res =>
-      dispatch({
-        type: CREATE_COURSE,
-        payload: res.data
-      })
-    )
+
+// Use Redux-Thunk to make thenable action
+export const createCourse = (course) => {
+  return function (dispatch) {
+    return axios.post('create', course).then(
+      res => dispatch({ type: CREATE_COURSE, payload: res.data }),
+      error => console.log(error)
+    );
+  };
+
 }
+
+// export const createCourse = (course) => dispatch => {
+//   axios.post('create', course)
+//     .then(res =>
+//       dispatch({
+//         type: CREATE_COURSE,
+//         payload: res.data
+//       })
+//     )
+// }
 
 export const updateCourse = (courseId, course) => dispatch => {
   axios.put(`/courses/edit/${courseId}`, course)

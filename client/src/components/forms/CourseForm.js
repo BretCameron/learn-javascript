@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { createCourse, updateCourse, deleteCourse } from '../../actions/courseActions';
+import DeleteModal from '../DeleteModal';
 // import SeeAllCourses from '../links/SeeAllCourses';
 
 class CourseForm extends Component {
@@ -11,7 +13,20 @@ class CourseForm extends Component {
     courseName: '',
     courseSummary: '',
     courseTags: [],
-    message: ''
+    message: '',
+    redirect: false,
+    modal: false,
+  }
+
+  componentDidMount = () => {
+    this.setState({ redirect: false })
+  }
+
+  renderRedirect = () => {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={redirect} />
+    };
   }
 
   createCourseSubmit = (e) => {
@@ -29,8 +44,14 @@ class CourseForm extends Component {
       courseTags,
     }
     try {
-      this.props.createCourse(newCourse);
-      this.setState({ message: 'Course created successfully!' })
+      this.props.createCourse(newCourse)
+        .then((item) => {
+          this.setState({
+            message: 'Course created successfully!',
+            redirect: `/courses/${item.payload._id}`
+          })
+        }
+        );
     } catch (err) {
       this.setState({ message: `There was an error: ${err.message}` })
     }
@@ -53,7 +74,9 @@ class CourseForm extends Component {
     }
     try {
       this.props.updateCourse(courseId, updatedCourse);
-      this.setState({ message: 'Course updated successfully!' })
+      this.setState({
+        message: 'Course updated successfully!'
+      });
     } catch (err) {
       this.setState({ message: `There was an error: ${err.message}` })
     }
@@ -63,6 +86,7 @@ class CourseForm extends Component {
     e.preventDefault();
     const { courseId } = this.props;
     this.props.deleteCourse(courseId);
+    this.setState({ redirect: '/courses' });
   }
 
   updateInput = (e) => {
@@ -76,14 +100,15 @@ class CourseForm extends Component {
     }
   }
 
+  toggleModal = (e) => {
+    e.preventDefault();
+    this.setState({ modal: !this.state.modal });
+  }
+
   render() {
-    // const {
-    // courseDescription,
-    // courseDifficulty,
-    // courseName,
-    // courseSummary,
-    // courseTags
-    // } = this.state;
+    const {
+      modal
+    } = this.state;
     const {
       name,
       difficulty,
@@ -95,6 +120,8 @@ class CourseForm extends Component {
     } = this.props;
     return (
       <div>
+        {this.renderRedirect()}
+        {modal ? <DeleteModal name={name} deleteCourse={this.deleteCourseSubmit} toggleModal={this.toggleModal} /> : ''}
         <form method="POST">
           <div className="course-create-grid">
             <div>
@@ -135,7 +162,7 @@ class CourseForm extends Component {
                 {this.state.message}</p>
             </div>
             <div style={{ display: courseId ? 'block' : 'none' }}>
-              <input type="submit" value="Delete Course" className="warning" onClick={this.deleteCourseSubmit} />
+              <input type="submit" value="Delete Course" className="warning" onClick={this.toggleModal} />
             </div>
           </div>
         </form>
