@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getCourseById, getCourses } from '../actions/courseActions';
 import SeeAllCourses from '../components/links/SeeAllCourses';
 import EditCourse from '../components/links/EditCourse';
+import DuplicateCourse from '../components/links/DuplicateCourse';
 import CourseCard from '../components/CourseCard';
 
 class CoursePage extends Component {
@@ -29,6 +30,7 @@ class CoursePage extends Component {
           <h1>{name}</h1>
           <p style={{ textTransform: 'uppercase' }}>{difficulty}</p>
           <EditCourse courseId={courseId} />
+          <DuplicateCourse />
           <h2 style={{ fontWeight: '100', fontSize: '1.2rem' }}>{summary}</h2>
 
 
