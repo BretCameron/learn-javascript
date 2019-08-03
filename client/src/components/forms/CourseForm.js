@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+// import axios from 'axios';
 
 import { createCourse, updateCourse, deleteCourse } from '../../actions/courseActions';
 import DeleteModal from '../DeleteModal';
@@ -11,6 +12,7 @@ class CourseForm extends Component {
   state = {
     courseDescription: '',
     courseDifficulty: 'beginner',
+    courseCategory: '',
     courseName: '',
     courseSummary: '',
     courseTags: [],
@@ -19,10 +21,11 @@ class CourseForm extends Component {
     message: '',
     redirect: false,
     modal: false,
+    source: '',
   }
 
   componentDidMount = () => {
-    this.setState({ redirect: false })
+    this.setState({ redirect: false });
   }
 
   renderRedirect = () => {
@@ -35,9 +38,11 @@ class CourseForm extends Component {
   createCourseSubmit = (e) => {
     e.preventDefault();
 
-    const { courseDescription,
+    const { 
+      courseDescription,
       courseDifficulty,
       courseName,
+      courseCategory,
       courseSummary,
       courseTags,
       image_id,
@@ -48,6 +53,7 @@ class CourseForm extends Component {
       courseDescription,
       courseDifficulty,
       courseName,
+      courseCategory,
       courseSummary,
       courseTags,
       image_id,
@@ -70,19 +76,40 @@ class CourseForm extends Component {
 
   updateCourseSubmit = (e) => {
     e.preventDefault();
-    const { courseId } = this.props;
-    const { courseDescription,
+    
+    const {
+      name,
+      difficulty,
+      summary,
+      category,
+      description,
+      tags,
+      courseId
+    } = this.props;
+
+    const { 
+      courseDescription,
       courseDifficulty,
       courseName,
+      courseCategory,
       courseSummary,
-      courseTags } = this.state;
+      courseTags,
+      image_id,
+      image_name,
+    } = this.state;
+
     const updatedCourse = {
-      name: courseName,
-      summary: courseSummary,
-      description: courseDescription,
-      difficulty: courseDifficulty,
-      tags: courseTags,
+      name: courseName || name,
+      summary: courseSummary || summary,
+      category: courseCategory || category,
+      description: courseDescription || description,
+      difficulty: courseDifficulty || difficulty,
+      tags: courseTags || tags,
+      image_id: image_id,
+      image_name: image_name,
     }
+
+
     try {
       this.props.updateCourse(courseId, updatedCourse);
       this.setState({
@@ -128,15 +155,19 @@ class CourseForm extends Component {
     const {
       modal
     } = this.state;
+
+    const {courseId} = this.props;
     const {
       name,
       difficulty,
       summary,
+      category,
       description,
       tags,
-      courseId,
+      image_name,
       updateCourseName
-    } = this.props;
+    } = this.props.course.course;
+
     return (
       <div>
         {this.renderRedirect()}
@@ -162,6 +193,23 @@ class CourseForm extends Component {
                 <br /><br />
                 <label htmlFor="courseSummary">Short Summary*<em>(60 characters)</em></label>
                 <input onChange={this.updateInput} id="courseSummary" name="courseSummary" type="text" defaultValue={summary} />
+                <br /><br />
+                <label htmlFor="courseCategory">Course Category*</label>
+                <select onChange={this.updateInput} id="courseCategory" name="courseCategory" defaultValue={category}>
+                  <option value="algorithms">Algorithms</option>
+                  <option value="arrays">Arrays</option>
+                  <option value="classes">Classes</option>
+                  <option value="conditionals">Conditionals</option>
+                  <option value="es6+">ES6+</option>
+                  <option value="functions">Functions</option>
+                  <option value="functional-programming">Functional Programming</option>
+                  <option value="loops">Loops</option>
+                  <option value="numbers">Numbers</option>
+                  <option value="objects">Objects</option>
+                  <option value="object-oriented-programming">Object-Oriented Programming</option>
+                  <option value="regex">Regex</option>
+                  <option value="strings">Strings</option>
+                </select>
               </div>
             </div>
             <div style={{
@@ -170,6 +218,8 @@ class CourseForm extends Component {
               <UploadImage
                 setImageId={this.setImageId}
                 setImageName={this.setImageName}
+                courseId={courseId}
+                image_name={image_name}
               />
             </div>
             <div style={{
@@ -183,7 +233,6 @@ class CourseForm extends Component {
               <select onChange={this.updateInput} id="courseDifficulty" name="courseDifficulty" defaultValue={difficulty} >
                 <option value="beginner">Beginner</option>
                 <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
               </select>
             </div>
             <div>

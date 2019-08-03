@@ -23,9 +23,12 @@ router.put('/edit/:courseId', (req, res) => {
   const params = {
     name: req.body.name,
     summary: req.body.summary,
+    category: req.body.category,
     description: req.body.description,
     difficulty: req.body.difficulty,
-    tags: req.body.tags
+    tags: req.body.tags,
+    image_id: req.body.image_id,
+    image_name: req.body.image_name,
   };
   if (!params.tags.length > 0) delete params.tags;
   for (let i in params) if (!params[i]) delete params[i];
@@ -47,11 +50,12 @@ router.post('/create', (req, res) => {
   const newCourse = new Course({
     name: req.body.courseName,
     summary: req.body.courseSummary,
+    category: req.body.courseCategory,
     description: req.body.courseDescription,
     difficulty: req.body.courseDifficulty,
     tags: req.body.courseTags,
-    image_id: req.body.image_id || '0',
-    image_name: req.body.image_name || '',
+    image_id: req.body.image_id,
+    image_name: req.body.image_name,
   });
   newCourse.save()
     .then(item => res.json(item))

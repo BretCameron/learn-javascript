@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from 'react-redux';
 import './App.scss';
 
@@ -23,14 +23,13 @@ class App extends React.Component {
           <Router>
             <div className="layout-grid">
               <div className="full-width">
-                <Link to="/">
-                  <Header />
-                </Link>
+                    <Header />
               </div>
 
               <Switch>
-                <Route path="/" exact component={QuestionPage} />
+                <Route path="/" exact component={CoursesBrowsePage} />
                 <Route path="/courses" exact component={CoursesBrowsePage} />
+                <Route path="/question" exact component={QuestionPage} />
                 <Route path="/courses/create" exact component={CourseCreatePage} />
                 <Route path="/courses/edit/:courseId" exact component={CourseEditPage} />
                 <Route path="/courses/:courseId" exact component={CoursePage} />

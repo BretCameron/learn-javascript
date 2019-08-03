@@ -15,8 +15,31 @@ export default class UploadImage extends Component {
     this.setState({ width: this.imageRef.current.getBoundingClientRect().width });
     window.addEventListener('resize', () => {
       this.setState({ width: this.imageRef.current ? this.imageRef.current.getBoundingClientRect().width : 0 });
-    })
+    });
+
+    const {image_name} = this.props;
+    
+    if (image_name) {
+    axios.get(`/course-images/${image_name}`)
+        .then(res => {
+          localStorage.setItem(image_name, res.config.url);
+          this.setState({ source: res.config.url })
+        }
+        )
+        }
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.image_name !== this.props.image_name) {
+        const {image_name} = nextProps;
+        axios.get(`/course-images/${image_name}`)
+        .then(res => {
+          localStorage.setItem(image_name, res.config.url);
+          this.setState({ source: res.config.url })
+        }
+        )
+    }
+}
 
   componentWillUnmount = () => {
     window.removeEventListener('resize', () => {

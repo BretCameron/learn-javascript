@@ -5,14 +5,14 @@ import { getCourseById, getCourses } from '../actions/courseActions';
 import SeeAllCourses from '../components/links/SeeAllCourses';
 import EditCourse from '../components/links/EditCourse';
 import DuplicateCourse from '../components/links/DuplicateCourse';
-import CourseCard from '../components/CourseCard';
+// import CourseCard from '../components/CourseCard';
 import LessonCard from '../components/LessonCard';
 
 class CoursePage extends Component {
   componentDidMount = () => {
     const { courseId } = this.props.match.params;
     this.props.getCourseById(courseId);
-    this.props.getCourses();
+    // this.props.getCourses();
   }
 
   handleClick = (courseId) => {
@@ -22,8 +22,8 @@ class CoursePage extends Component {
   render() {
     const { courseId } = this.props.match.params;
     const { name, summary, description, difficulty, tags } = this.props.course.course;
-    const { course, courses } = this.props.course;
-    let suggestionCount = 0;
+    // const { course, courses } = this.props.course;
+    // let suggestionCount = 0;
     return (
       <div style={{ width: '100%', padding: '40px 0' }}>
         <div className="container">
@@ -45,17 +45,6 @@ class CoursePage extends Component {
           {[1, 2, 3].map((el, i) => {
             return <LessonCard key={i} number={i} />
           })}
-          <br /><br /><br />
-          <h2>Similar Courses</h2>
-          {courses.map((el, i) => {
-            if (el._id !== course._id && suggestionCount < 3) {
-              suggestionCount++;
-              return <CourseCard handleClick={this.handleClick} key={el._id} id={el._id} name={el.name} difficulty={el.difficulty} summary={el.summary} tags={el.tags} />
-            } else {
-              return null;
-            }
-          })}
-
         </div>
       </div>
     )

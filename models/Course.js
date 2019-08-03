@@ -6,6 +6,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const CourseSchema = new Schema({
   name: String,
   summary: String,
+  category: String,
   description: String,
   difficulty: String,
   tags: [String],

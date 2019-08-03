@@ -26,7 +26,7 @@ class CoursesBrowsePage extends Component {
     const { search } = this.state;
     const regex = new RegExp(search, 'i');
     return items.map((el, i) => {
-      return <CourseCard key={el._id} id={el._id} name={el.name} difficulty={el.difficulty} summary={el.summary} tags={el.tags} image_id={el.image_id} image_name={el.image_name} style={{
+      return <CourseCard key={el._id} id={el._id} name={el.name} difficulty={el.difficulty} summary={el.summary} tags={el.tags} image_id={el.image_id} image_name={el.image_name} category={el.category} style={{
         display: regex.test(el.name) ? 'inline-block' : 'none'
       }}
       />
@@ -36,7 +36,7 @@ class CoursesBrowsePage extends Component {
   render() {
     const { courses, loading } = this.props.course;
     return (
-      <div style={{ width: '100%', padding: '40px 0' }}>
+      <div style={{ width: '100%', padding: '0 0 0 0' }}>
         <Hero />
         <div className="container">
           <div className="title-with-search">
