@@ -22,8 +22,11 @@ mongoose
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
+const cacheTime = 86400000 * 30 // the time you want
+
 app.use('/courses', require('./routes/api/courses'));
 app.use('/images', require('./routes/api/images'));
+app.use('/course-images', express.static(path.join(__dirname, '/static/courseImages'), { maxAge: cacheTime }));
 app.use('/lessons', require('./routes/api/lessons'));
 app.use('/users', require('./routes/api/users'));
 

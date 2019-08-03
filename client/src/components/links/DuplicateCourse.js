@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default class CreateNewCourse extends Component {
   render() {
-    const { courseId } = this.props;
+    // const { courseId } = this.props;
     return (
       <div style={{ display: 'inline-block', marginRight: '20px' }}>
         <Link to={`/courses`}>

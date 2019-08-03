@@ -9,9 +9,9 @@ export default class CourseCreatePage extends Component {
       <div style={{ width: '100%', padding: '40px 0' }}>
         <div className="container">
           <SeeAllCourses />
-          <h1>Create a Course</h1>
+          {/* <h1>Create a Course</h1> */}
           <br />
-          <CourseForm  />
+          <CourseForm />
         </div>
       </div>
     )

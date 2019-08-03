@@ -37,8 +37,8 @@ router.put('/edit/:courseId', (req, res) => {
 // Delete course by id
 router.delete('/delete/:courseId', (req, res) => {
   Course.findByIdAndDelete(req.params.courseId)
-  .then(() => res.json({success: true}))
-  .catch(err => console.log(err));
+    .then(() => res.json({ success: true }))
+    .catch(err => console.log(err));
 })
 
 
@@ -50,6 +50,8 @@ router.post('/create', (req, res) => {
     description: req.body.courseDescription,
     difficulty: req.body.courseDifficulty,
     tags: req.body.courseTags,
+    image_id: req.body.image_id || '0',
+    image_name: req.body.image_name || '',
   });
   newCourse.save()
     .then(item => res.json(item))

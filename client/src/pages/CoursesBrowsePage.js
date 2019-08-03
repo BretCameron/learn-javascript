@@ -26,7 +26,7 @@ class CoursesBrowsePage extends Component {
     const { search } = this.state;
     const regex = new RegExp(search, 'i');
     return items.map((el, i) => {
-      return <CourseCard key={el._id} id={el._id} name={el.name} difficulty={el.difficulty} summary={el.summary} tags={el.tags} style={{
+      return <CourseCard key={el._id} id={el._id} name={el.name} difficulty={el.difficulty} summary={el.summary} tags={el.tags} image_id={el.image_id} image_name={el.image_name} style={{
         display: regex.test(el.name) ? 'inline-block' : 'none'
       }}
       />

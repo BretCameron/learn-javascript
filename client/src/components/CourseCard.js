@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 export default class CourseCard extends Component {
+  state = {
+    buffer: '',
+    source: localStorage.getItem(this.props.image_name) || null,
+  }
+
+  componentDidMount = () => {
+    const { image_name } = this.props;
+    const { source } = this.state;
+    if (!source) {
+      axios.get(`/course-images/${image_name}`)
+      .then(res => {
+        localStorage.setItem(image_name, res.config.url);
+        this.setState({ source: res.config.url })
+      }
+      )
+      }
+  }
+
   render() {
+    const { source } = this.state;
     const { name,
       id,
       style,
@@ -29,10 +49,15 @@ export default class CourseCard extends Component {
                 Popular
                 </div>
 
-              <img width="100%" style={{
+              <img width="188" style={{
+                height: '125px',
+                marginTop: '-25px'
+              }} src={source} alt="" />
+
+              {/* <img width="100%" style={{
                 height: '50%',
                 marginTop: '-25px'
-              }} src="https://images.unsplash.com/photo-1564299046452-588e3a6284e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1049&q=80" alt="" />
+              }} src="https://images.unsplash.com/photo-1564299046452-588e3a6284e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1049&q=80" alt="" /> */}
 
               <div style={{ margin: '0 10px' }}>
 
@@ -43,7 +68,7 @@ export default class CourseCard extends Component {
                   {name}
                 </div>
                 {/* {tags ? tags.map((el, i) => {
-                return (
+                return     (
                   el ? <em key={i} style={{ fontSize: '0.95rem', background: 'grey', margin: '2px', color: '#fff', padding: '1px 3px', textTransform: 'lowercase', display: 'inline-block' }}>{el}</em> : ''
                 )
               }) : ''} */}

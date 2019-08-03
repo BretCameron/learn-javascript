@@ -6,13 +6,18 @@ const ImageSchema = new Schema({
     type: String,
     required: true
   },
-  size: {
-    type: Number,
+  path: {
+    type: String,
     required: true
   },
+  originalName: {
+    type: String
+  },
+  size: {
+    type: Number
+  },
   file: {
-    type: Buffer,
-    required: true
+    type: Buffer
   },
   date: {
     type: Date,

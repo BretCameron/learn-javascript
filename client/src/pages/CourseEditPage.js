@@ -27,11 +27,11 @@ class CourseCreatePage extends Component {
       <div style={{ width: '100%', padding: '40px 0' }}>
         <div className="container">
           <SeeAllCourses />
-          <h1>Edit Course: {courseName || name}</h1>
+          {/* <h1>Edit Course: {courseName || name}</h1> */}
           <br />
           <CourseForm
             courseId={courseId}
-            name={name}
+            name={courseName || name}
             summary={summary}
             description={description}
             tags={tags}

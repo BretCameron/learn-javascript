@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 
 export default class CourseCard extends Component {
   render() {
-    const { name,
+    const {
+      // name,
       id,
-      tags,
+      // tags,
       style,
       handleClick,
       number
     } = this.props;
     return (
-      <div className="lesson-card" style={style} onClick={handleClick ? () => handleClick(id) : () => {}}>
+      <div className="lesson-card" style={style} onClick={handleClick ? () => handleClick(id) : () => { }}>
         <div>
           <Link to={`/courses/${id}`}>
             <div>

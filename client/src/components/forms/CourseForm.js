@@ -14,6 +14,8 @@ class CourseForm extends Component {
     courseName: '',
     courseSummary: '',
     courseTags: [],
+    image_id: '',
+    image_name: '',
     message: '',
     redirect: false,
     modal: false,
@@ -32,18 +34,26 @@ class CourseForm extends Component {
 
   createCourseSubmit = (e) => {
     e.preventDefault();
+
     const { courseDescription,
       courseDifficulty,
       courseName,
       courseSummary,
-      courseTags } = this.state;
+      courseTags,
+      image_id,
+      image_name,
+    } = this.state;
+
     const newCourse = {
       courseDescription,
       courseDifficulty,
       courseName,
       courseSummary,
       courseTags,
+      image_id,
+      image_name,
     }
+
     try {
       this.props.createCourse(newCourse)
         .then((item) => {
@@ -101,6 +111,14 @@ class CourseForm extends Component {
     }
   }
 
+  setImageId = (id) => {
+    this.setState({ image_id: id });
+  }
+
+  setImageName = (name) => {
+    this.setState({ image_name: name });
+  }
+
   toggleModal = (e) => {
     e.preventDefault();
     this.setState({ modal: !this.state.modal });
@@ -123,27 +141,42 @@ class CourseForm extends Component {
       <div>
         {this.renderRedirect()}
         {modal ? <DeleteModal name={name} deleteCourse={this.deleteCourseSubmit} toggleModal={this.toggleModal} /> : ''}
-        <UploadImage /><br /><br /><br />
         <form method="POST">
           <div className="course-create-grid">
-            <div>
-              <label htmlFor="courseName">Course Name*</label>
-              <input onChange={(e) => {
-                this.updateInput(e);
-                if (updateCourseName) updateCourseName(e.currentTarget.value);
-              }
-              } id="courseName" name="courseName" type="text" defaultValue={name} />
-            </div>
-            <div>
-              <label htmlFor="courseSummary">Short Summary*<em>(60 characters)</em></label>
-              <input onChange={this.updateInput} id="courseSummary" name="courseSummary" type="text" defaultValue={summary} />
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}>
+              <div>
+                <h1 style={{ margin: '0 0 10px 0', }}>{courseId ? `Edit Course:` : 'Create a Course'}</h1>
+                <h1 style={{ margin: '0 0 20px 0', wordBreak: 'break-word' }}>{courseId ? name : ''}</h1>
+              </div>
+              <div>
+                <label htmlFor="courseName">Course Name*</label>
+                <input onChange={(e) => {
+                  this.updateInput(e);
+                  if (updateCourseName) updateCourseName(e.currentTarget.value);
+                }
+                } id="courseName" name="courseName" type="text" defaultValue={name} />
+                <br /><br />
+                <label htmlFor="courseSummary">Short Summary*<em>(60 characters)</em></label>
+                <input onChange={this.updateInput} id="courseSummary" name="courseSummary" type="text" defaultValue={summary} />
+              </div>
             </div>
             <div style={{
-              gridColumn: '2',
-              gridRow: '2 / 4'
+              alignSelf: 'end'
+            }}>
+              <UploadImage
+                setImageId={this.setImageId}
+                setImageName={this.setImageName}
+              />
+            </div>
+            <div style={{
+              gridColumn: '1 / 3'
             }}>
               <label htmlFor="courseDescription">Description</label>
-              <textarea onChange={this.updateInput} id="courseDescription" name="courseDescription" defaultValue={description} />
+              <textarea style={{ height: '6rem' }} onChange={this.updateInput} id="courseDescription" name="courseDescription" defaultValue={description} />
             </div>
             <div>
               <label htmlFor="courseDifficulty">Course Difficulty*</label>
