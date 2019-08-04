@@ -11,7 +11,9 @@ export default class CourseCreatePage extends Component {
           <SeeAllCourses />
           {/* <h1>Create a Course</h1> */}
           <br />
-          <CourseForm />
+          <CourseForm
+            courseId={null}
+          />
         </div>
       </div>
     )

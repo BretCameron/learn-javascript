@@ -162,6 +162,7 @@ class CourseForm extends Component {
     } = this.state;
 
     const { courseId } = this.props;
+
     const {
       name,
       difficulty,
@@ -171,7 +172,7 @@ class CourseForm extends Component {
       tags,
       image_name,
       updateCourseName
-    } = this.props.course.course;
+    } = courseId ? this.props.course.course : '';
 
     return (
       <div>
