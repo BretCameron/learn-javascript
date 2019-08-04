@@ -33,7 +33,6 @@ export default function (state = initialState, action) {
       }
     case DELETE_COURSE:
       return {
-        ...state,
         courses: state.courses.filter(course => course._id !== action.payload)
       }
     case COURSES_LOADING:
