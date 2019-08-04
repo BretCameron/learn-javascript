@@ -3,13 +3,9 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import CourseCard from '../components/CourseCard';
-
 import { getCourseById, getCourses } from '../actions/courseActions';
 import SeeAllCourses from '../components/links/SeeAllCourses';
 import EditCourse from '../components/links/EditCourse';
-// import DuplicateCourse from '../components/links/DuplicateCourse';
-// import CourseCard from '../components/CourseCard';
-import LessonCard from '../components/LessonCard';
 
 class CoursePage extends Component {
   state = {
@@ -63,16 +59,8 @@ class CoursePage extends Component {
 <div style={{display: 'grid', gridTemplateColumns: '3fr 2fr'}}>
 
         <div>
-          {/* <p style={{ textTransform: 'uppercase' }}>{difficulty}</p> */}
-          {/* <DuplicateCourse /> */}
           <h2 style={{ fontWeight: '100', fontSize: '1.4rem', paddingBottom: '10px' }}>{summary}</h2>
-<hr style={{width: '30px', margin: '0', border: 'none', borderTop: '1px solid darkgrey'}} />
-
-          {/* {tags ? tags.map((el, i) => {
-            return (
-              el ? <em key={i} style={{ fontSize: '0.95rem', background: 'grey', margin: '0 2px', color: '#fff', padding: '1px 3px', textTransform: 'lowercase' }}>{el}</em> : null
-            )
-          }) : ''} */}
+          <hr style={{width: '30px', margin: '0', border: 'none', borderTop: '1px solid darkgrey'}} />
           <div dangerouslySetInnerHTML={{ __html: description }}></div>
           </div>
           <div style={{marginLeft: '50px', justifySelf: 'center'}}>
@@ -80,9 +68,6 @@ class CoursePage extends Component {
           </div>
           </div>
           <br /><br /><br />
-          {/* {[1, 2, 3].map((el, i) => {
-            return <LessonCard key={i} number={i} />
-          })} */}
         </div>
       </div>
     )

@@ -4,6 +4,9 @@ const path = require('path');
 const config = require('config');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+const https = require('https');
+
+const removeUnusedImages = require('./helpers/removeUnusedImages');
 
 const app = express();
 
@@ -23,10 +26,12 @@ mongoose
   .catch(err => console.log(err));
 
 const cacheTime = 86400000 * 30 // the time you want
+removeUnusedImages();
 
 app.use('/courses', require('./routes/api/courses'));
 app.use('/images', require('./routes/api/images'));
 app.use('/course-images', express.static(path.join(__dirname, '/static/courseImages'), { maxAge: cacheTime }));
+app.use('/remove-unused-images', require('./routes/api/removeUnusedImages'));
 app.use('/lessons', require('./routes/api/lessons'));
 app.use('/users', require('./routes/api/users'));
 
