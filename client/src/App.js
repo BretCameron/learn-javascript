@@ -22,10 +22,9 @@ class App extends React.Component {
         <Provider store={store}>
           <Router>
             <div className="layout-grid">
-              <div className="full-width">
-                    <Header />
-              </div>
-
+              <header className="full-width">
+                <Header />
+              </header>
               <Switch>
                 <Route path="/" exact component={CoursesBrowsePage} />
                 <Route path="/courses" exact component={CoursesBrowsePage} />
@@ -36,11 +35,9 @@ class App extends React.Component {
                 <Route path="/sign-up" component={SignUpPage} />
                 <Route path="/login" component={LoginPage} />
               </Switch>
-
-              <div className="full-width">
+              <footer className="full-width">
                 <Footer />
-              </div>
-
+              </footer>
             </div>
           </Router>
         </Provider>

@@ -6,45 +6,51 @@ export default class UploadImage extends Component {
     file: {},
     _id: '',
     source: null,
-    width: 0
+    width: 0,
+    _mounted: false
   }
 
   imageRef = React.createRef();
 
   componentDidMount = () => {
-    this.setState({ width: this.imageRef.current.getBoundingClientRect().width });
+    this.setState({
+      _mounted: true,
+      width: this.imageRef.current.getBoundingClientRect().width
+    }, () => {
+      const { image_name } = this.props;
+
+      if (image_name && this.state._mounted) {
+        axios.get(`/course-images/${image_name}`)
+          .then(res => {
+            localStorage.setItem(image_name, res.config.url);
+            this.setState({ source: res.config.url })
+          })
+      }
+    });
+
     window.addEventListener('resize', () => {
       this.setState({ width: this.imageRef.current ? this.imageRef.current.getBoundingClientRect().width : 0 });
     });
 
-    const {image_name} = this.props;
-    
-    if (image_name) {
-    axios.get(`/course-images/${image_name}`)
-        .then(res => {
-          localStorage.setItem(image_name, res.config.url);
-          this.setState({ source: res.config.url })
-        }
-        )
-        }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.image_name !== this.props.image_name) {
-        const {image_name} = nextProps;
-        axios.get(`/course-images/${image_name}`)
+    if (nextProps.image_name !== this.props.image_name && typeof nextProps.image_name !== "undefined") {
+      const { image_name } = nextProps;
+      axios.get(`/course-images/${image_name}`)
         .then(res => {
           localStorage.setItem(image_name, res.config.url);
           this.setState({ source: res.config.url })
         }
         )
     }
-}
+  }
 
   componentWillUnmount = () => {
     window.removeEventListener('resize', () => {
       this.setState({ width: 0 });
-    })
+    });
+    this.setState({ _mounted: false })
   }
 
   getImage = () => {

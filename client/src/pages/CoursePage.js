@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+
+import CourseCard from '../components/CourseCard';
 
 import { getCourseById, getCourses } from '../actions/courseActions';
 import SeeAllCourses from '../components/links/SeeAllCourses';
 import EditCourse from '../components/links/EditCourse';
-import DuplicateCourse from '../components/links/DuplicateCourse';
+// import DuplicateCourse from '../components/links/DuplicateCourse';
 // import CourseCard from '../components/CourseCard';
 import LessonCard from '../components/LessonCard';
 
 class CoursePage extends Component {
+  state = {
+    source: ''
+  }
+
   componentDidMount = () => {
+    const { courses } = this.props.course;
     const { courseId } = this.props.match.params;
-    this.props.getCourseById(courseId);
-    // this.props.getCourses();
+    this.props.getCourseById(courseId, courses);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { source } = this.state;
+    const { image_name } = nextProps.course.course;
+    if (!source && image_name) {
+      axios.get(`/course-images/${image_name}`)
+        .then(res => {
+          localStorage.setItem(image_name, res.config.url);
+          this.setState({ source: res.config.url })
+        })
+    }
   }
 
   handleClick = (courseId) => {
@@ -21,30 +40,49 @@ class CoursePage extends Component {
 
   render() {
     const { courseId } = this.props.match.params;
-    const { name, summary, description, difficulty, tags } = this.props.course.course;
-    // const { course, courses } = this.props.course;
-    // let suggestionCount = 0;
+    const { name, summary, description, difficulty, tags, category } = this.props.course.course;
+    const { source } = this.state;
     return (
-      <div style={{ width: '100%', padding: '40px 0' }}>
+      <div style={{ width: '100%', padding: '0' }}>
+        <div className="courses-hero" style={{
+          height: '20vh',
+          background: 'darkgrey',
+          backgroundImage: `url(${source})`,
+          backgroundSize: 'cover',
+          backgroundPosition: '100% 33%'
+        }} />
+        
         <div className="container">
-          <SeeAllCourses />
+
+          <br /><br />
+          <SeeAllCourses /><EditCourse courseId={courseId} />
+
+
           <h1>{name}</h1>
-          <p style={{ textTransform: 'uppercase' }}>{difficulty}</p>
-          <EditCourse courseId={courseId} />
-          <DuplicateCourse />
-          <h2 style={{ fontWeight: '100', fontSize: '1.2rem' }}>{summary}</h2>
 
+<div style={{display: 'grid', gridTemplateColumns: '3fr 2fr'}}>
 
-          {tags ? tags.map((el, i) => {
+        <div>
+          {/* <p style={{ textTransform: 'uppercase' }}>{difficulty}</p> */}
+          {/* <DuplicateCourse /> */}
+          <h2 style={{ fontWeight: '100', fontSize: '1.4rem', paddingBottom: '10px' }}>{summary}</h2>
+<hr style={{width: '30px', margin: '0', border: 'none', borderTop: '1px solid darkgrey'}} />
+
+          {/* {tags ? tags.map((el, i) => {
             return (
               el ? <em key={i} style={{ fontSize: '0.95rem', background: 'grey', margin: '0 2px', color: '#fff', padding: '1px 3px', textTransform: 'lowercase' }}>{el}</em> : null
             )
-          }) : ''}
-          <p>{description}</p>
+          }) : ''} */}
+          <div dangerouslySetInnerHTML={{ __html: description }}></div>
+          </div>
+          <div style={{marginLeft: '50px', justifySelf: 'center'}}>
+                  <CourseCard name={name} difficulty={difficulty} summary={summary} tags={tags} source={source} category={category} />
+          </div>
+          </div>
           <br /><br /><br />
-          {[1, 2, 3].map((el, i) => {
+          {/* {[1, 2, 3].map((el, i) => {
             return <LessonCard key={i} number={i} />
-          })}
+          })} */}
         </div>
       </div>
     )
@@ -52,7 +90,8 @@ class CoursePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  course: state.course
+  course: state.course,
+  courses: state.courses
 });
 
 export default connect(mapStateToProps, { getCourseById, getCourses })(CoursePage);

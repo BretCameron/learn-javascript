@@ -11,7 +11,8 @@ import Hero from '../components/Hero';
 class CoursesBrowsePage extends Component {
   state = {
     data: [],
-    search: ''
+    search: '',
+    source: ''
   }
 
   componentDidMount = () => {

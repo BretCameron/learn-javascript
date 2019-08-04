@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { createCourse, updateCourse, deleteCourse } from '../../actions/courseActions';
 import DeleteModal from '../DeleteModal';
 import UploadImage from './UploadImage';
+import TextEditor from './TextEditor';
 // import SeeAllCourses from '../links/SeeAllCourses';
 
 class CourseForm extends Component {
@@ -38,7 +39,7 @@ class CourseForm extends Component {
   createCourseSubmit = (e) => {
     e.preventDefault();
 
-    const { 
+    const {
       courseDescription,
       courseDifficulty,
       courseName,
@@ -76,7 +77,7 @@ class CourseForm extends Component {
 
   updateCourseSubmit = (e) => {
     e.preventDefault();
-    
+
     const {
       name,
       difficulty,
@@ -87,7 +88,7 @@ class CourseForm extends Component {
       courseId
     } = this.props;
 
-    const { 
+    const {
       courseDescription,
       courseDifficulty,
       courseName,
@@ -138,6 +139,10 @@ class CourseForm extends Component {
     }
   }
 
+  updateDescription = (html) => {
+    this.setState({ courseDescription: html });
+  }
+
   setImageId = (id) => {
     this.setState({ image_id: id });
   }
@@ -156,7 +161,7 @@ class CourseForm extends Component {
       modal
     } = this.state;
 
-    const {courseId} = this.props;
+    const { courseId } = this.props;
     const {
       name,
       difficulty,
@@ -218,7 +223,6 @@ class CourseForm extends Component {
               <UploadImage
                 setImageId={this.setImageId}
                 setImageName={this.setImageName}
-                courseId={courseId}
                 image_name={image_name}
               />
             </div>
@@ -226,7 +230,13 @@ class CourseForm extends Component {
               gridColumn: '1 / 3'
             }}>
               <label htmlFor="courseDescription">Description</label>
-              <textarea style={{ height: '6rem' }} onChange={this.updateInput} id="courseDescription" name="courseDescription" defaultValue={description} />
+              {/* <textarea style={{ height: '6rem' }} onChange={this.updateInput} id="courseDescription" name="courseDescription" defaultValue={description} /> */}
+              <TextEditor
+                id="courseDescription"
+                name="courseDescription"
+                updateDescription={this.updateDescription}
+                defaultValue={description}
+              />
             </div>
             <div>
               <label htmlFor="courseDifficulty">Course Difficulty*</label>
@@ -256,7 +266,8 @@ class CourseForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  course: state.course
+  course: state.course,
+  courses: state.courses
 });
 
 export default connect(mapStateToProps, { createCourse, updateCourse, deleteCourse })(CourseForm);

@@ -13,16 +13,33 @@ export const getCourses = () => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const getCourseById = (courseId) => dispatch => {
-  dispatch(setItemsLoading());
-  axios.get(`/courses/${courseId}`)
-    .then(res =>
-      dispatch({
-        type: GET_COURSE,
-        payload: res.data
-      })
-    )
-    .catch(err => console.log(err))
+export const getCourseById = (courseId, courses) => dispatch => {
+
+  let isCourseLoaded = false;
+
+  if (courses) {
+    courses.forEach(el => {
+      if (el._id === courseId) {
+        isCourseLoaded = true;
+        dispatch({
+          type: GET_COURSE,
+          payload: el
+        })
+      }
+    })
+  }
+
+  if (!isCourseLoaded) {
+    dispatch(setItemsLoading());
+    axios.get(`/courses/${courseId}`)
+      .then(res =>
+        dispatch({
+          type: GET_COURSE,
+          payload: res.data
+        })
+      )
+      .catch(err => console.log(err))
+  }
 }
 
 export const setItemsLoading = () => {

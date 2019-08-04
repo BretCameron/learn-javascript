@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { getCourseById } from '../actions/courseActions';
 import SeeAllCourses from '../components/links/SeeAllCourses';
+import GoBackToCourse from '../components/links/GoBackToCourse';
 import CourseForm from '../components/forms/CourseForm';
 
 class CourseCreatePage extends Component {
@@ -27,6 +28,9 @@ class CourseCreatePage extends Component {
       <div style={{ width: '100%', padding: '40px 0' }}>
         <div className="container">
           <SeeAllCourses />
+          <GoBackToCourse
+          courseId={courseId}
+          />
           {/* <h1>Edit Course: {courseName || name}</h1> */}
           <br />
           <CourseForm

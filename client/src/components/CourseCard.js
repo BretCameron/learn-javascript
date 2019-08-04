@@ -12,7 +12,7 @@ export default class CourseCard extends Component {
   componentDidMount = () => {
     const { image_name } = this.props;
     const { source } = this.state;
-    if (!source) {
+    if (!source && image_name) {
       axios.get(`/course-images/${image_name}`)
         .then(res => {
           localStorage.setItem(image_name, res.config.url);
@@ -55,7 +55,7 @@ export default class CourseCard extends Component {
               <img width="188" style={{
                 height: '125px',
                 marginTop: likes > 500 ? '-22px' : '-1px',
-              }} src={source || 'https://images.unsplash.com/photo-1564299046452-588e3a6284e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1049&q=80'} alt="" />
+              }} src={this.props.source || source} alt="" />
 
               <div style={{ margin: '0 10px' }}>
 
