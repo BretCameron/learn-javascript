@@ -80,12 +80,16 @@ export const updateCourse = (courseId, course) => dispatch => {
     )
 }
 
-export const deleteCourse = (courseId) => dispatch => {
-  axios.delete(`/courses/delete/${courseId}`)
-    .then(res =>
-      dispatch({
-        type: DELETE_COURSE,
-        payload: courseId
-      })
-    )
+// Use Redux-Thunk to make thenable action
+export const deleteCourse = (courseId) => {
+  return function (dispatch) {
+    return axios.delete(`/courses/delete/${courseId}`).then(
+      res =>
+        dispatch({
+          type: DELETE_COURSE,
+          payload: courseId
+        }),
+      error => console.log(error)
+    );
+  }
 }

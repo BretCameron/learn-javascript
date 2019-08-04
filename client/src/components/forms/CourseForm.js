@@ -124,8 +124,8 @@ class CourseForm extends Component {
   deleteCourseSubmit = (e) => {
     e.preventDefault();
     const { courseId } = this.props;
-    this.props.deleteCourse(courseId);
-    this.setState({ redirect: '/courses' });
+    this.props.deleteCourse(courseId)
+      .then(() => this.setState({ redirect: '/courses' }));
   }
 
   updateInput = (e) => {
