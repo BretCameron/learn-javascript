@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const xss = require('xss');
 
 const Lesson = require('../../models/Lesson');
 const Course = require('../../models/Course');
@@ -24,7 +25,7 @@ router.put('/edit/:courseId', (req, res) => {
     name: req.body.name,
     summary: req.body.summary,
     category: req.body.category,
-    description: req.body.description,
+    description: xss(req.body.description),
     difficulty: req.body.difficulty,
     tags: req.body.tags,
     image_id: req.body.image_id,
@@ -51,7 +52,7 @@ router.post('/create', (req, res) => {
     name: req.body.courseName,
     summary: req.body.courseSummary,
     category: req.body.courseCategory,
-    description: req.body.courseDescription,
+    description: xss(req.body.courseDescription),
     difficulty: req.body.courseDifficulty,
     tags: req.body.courseTags,
     image_id: req.body.image_id,

@@ -12,25 +12,36 @@ export default class Header extends Component {
             alignItems: 'center'
           }}>
             <Link to="/">
-            <h1 style={{ display: 'inline-block', fontStyle: 'italic', fontSize: '1.6rem' }}>LearnJavaScript.com</h1>
+              <h1 style={{ display: 'inline-block', fontStyle: 'italic', fontSize: '1.6rem' }}>LearnJavaScript.com</h1>
             </Link>
             <div>
-                <div style={{
-                  display: 'inline-block',
-                  marginLeft: '30px'
-                }}>
+              <div style={{
+                display: 'inline-block',
+                marginLeft: '30px',
+                fontWeight: '200'
+              }}>
+                <Link to="/">
+                  Become a Course Creator
+              </Link>
+              </div>
+              <div style={{
+                display: 'inline-block',
+                marginLeft: '30px',
+                fontWeight: '600'
+              }}>
                 <Link to="/login">
                   Log In
               </Link>
+              </div>
               <Link to="/sign-up">
                 <div style={{
                   display: 'inline-block',
-                  marginLeft: '30px'
+                  marginLeft: '30px',
+                  fontWeight: '600'
                 }}>
-                  </div>
                   Sign Up
-              </Link>
                   </div>
+              </Link>
             </div>
           </div>
         </div>

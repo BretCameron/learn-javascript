@@ -29,7 +29,8 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "uuid": "^3.3.2",
-    "validator": "^11.1.0"
+    "validator": "^11.1.0",
+    "xss": "^1.0.6"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

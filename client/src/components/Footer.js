@@ -17,20 +17,42 @@ export default class Footer extends Component {
               <p style={{ margin: 0, padding: '10px 0' }}>&copy; {Date(Date.now()).split(' ')[3]} Bret Cameron</p>
             </div>
             <div>
-              <Link to="/">
-                <div style={{
-                  display: 'inline-block',
-                  marginLeft: '30px',
-                  fontSize: '0.95rem'
-                }}>Privacy Policy</div>
+              <div style={{
+                display: 'inline-block',
+                marginLeft: '30px',
+                fontSize: '0.95rem'
+              }}>
+                <Link to="/">
+                  About Us
               </Link>
-              <Link to="/">
-                <div style={{
-                  display: 'inline-block',
-                  marginLeft: '30px',
-                  fontSize: '0.95rem'
-                }}>Terms and Conditions</div>
+              </div>
+              <div style={{
+                display: 'inline-block',
+                marginLeft: '30px',
+                fontSize: '0.95rem'
+              }}>
+                <Link to="/">
+                  Contact
               </Link>
+              </div>
+              <div style={{
+                display: 'inline-block',
+                marginLeft: '30px',
+                fontSize: '0.95rem'
+              }}>
+                <Link to="/">
+                  Privacy Policy
+              </Link>
+              </div>
+              <div style={{
+                display: 'inline-block',
+                marginLeft: '30px',
+                fontSize: '0.95rem'
+              }}>
+                <Link to="/">
+                  Terms and Conditions
+              </Link>
+              </div>
             </div>
           </div>
         </div>

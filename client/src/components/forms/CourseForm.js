@@ -202,6 +202,7 @@ class CourseForm extends Component {
                 <br /><br />
                 <label htmlFor="courseCategory">Course Category*</label>
                 <select onChange={this.updateInput} id="courseCategory" name="courseCategory" defaultValue={category}>
+                  <option value=""></option>
                   <option value="algorithms">Algorithms</option>
                   <option value="arrays">Arrays</option>
                   <option value="classes">Classes</option>
