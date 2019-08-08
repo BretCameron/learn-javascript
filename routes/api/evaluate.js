@@ -12,6 +12,24 @@ const findInMap = (map, val) => {
   return false;
 };
 
+const getTestSummary = (map) => {
+  let tests = map.size || map.length, passed = 0, failed = 0;
+  for (let [k, v] of map) {
+    if (v === true) passed++;
+    if (v === false) failed++;
+  };
+  const round = (value, precision = 1) => {
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+  };
+  return {
+    tests,
+    passed: `${passed} (${round(passed / tests * 100)}%)`,
+    failed: `${failed} (${round(failed / tests * 100)}%)`,
+  };
+};
+
+
 router.post('/submit', (req, res) => {
 
   let { functionName, userSolutionString, courseSolutionString, testFunctionString } = req.body;
@@ -46,6 +64,7 @@ router.post('/submit', (req, res) => {
     res.json({
       /** If any value is false, the solution does not pass */
       pass: !findInMap(testResult, false),
+      summary: getTestSummary(testResult),
       tests: testResult
     });
   } catch (err) {

@@ -18,7 +18,8 @@ export default class QuestionPage extends React.Component {
     solution: '',
     result: '',
     displayModal: false,
-    tab: 'question-tab'
+    tab: 'question-tab',
+    summary: {},
   }
 
   switchTabs = (e) => {
@@ -76,8 +77,8 @@ export default class QuestionPage extends React.Component {
       testFunctionString,
     })
       .then(res => {
-        const { pass, tests } = res.data;
-        this.setState({ pass, tests, tab: 'tests-tab' }, () => console.log(this.state));
+        const { pass, tests, summary } = res.data;
+        this.setState({ pass, tests, summary, tab: 'tests-tab' }, () => console.log(this.state));
       })
   }
 
@@ -105,7 +106,7 @@ export default class QuestionPage extends React.Component {
   // }
 
   render() {
-    const { questionNum, result, tests, solution } = this.state;
+    const { questionNum, result, tests, solution, summary } = this.state;
     const { question, initialSolution, hint } = questions[questionNum];
     return (
       <>
@@ -141,6 +142,7 @@ export default class QuestionPage extends React.Component {
                 hint={hint}
               /> : <Tests2
                   tests={tests}
+                  summary={summary}
                 />}
             </div>
 
