@@ -6,7 +6,7 @@ export default class Question extends Component {
   render() {
     const { question, hint } = this.props;
     return (
-      <div style={{ height: '100%', fontSize: '1.05rem', padding: '10px 25px' }}>
+      <div className="question-box" style={{ height: '100%', fontSize: '1.05rem', padding: '10px 25px' }}>
         {/* <h2>Question {questionNum + 1}</h2> */}
         <div dangerouslySetInnerHTML={{ __html: question }} />
         <br />

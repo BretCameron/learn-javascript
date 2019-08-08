@@ -124,12 +124,7 @@ export default class QuestionPage extends React.Component {
                 </div>
               </ul>
             </div>
-            <div style={{
-              minHeight: '500px',
-              // border: '1px solid lightgrey',
-              boxShadow: '2px 2px 7px rgba(0,0,0,0.3)',
-              marginBottom: '20px',
-            }}>
+            <div id="question-area">
               {this.state.tab === "question-tab" ? <Question
                 questionNum={questionNum}
                 question={question}

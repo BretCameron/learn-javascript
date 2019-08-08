@@ -9,7 +9,7 @@ export default class Tests2 extends Component {
   render() {
     const { tests, summary, message } = this.props;
     return (
-      <div style={{ width: '100%', height: '500px', borderBottom: '1px solid lightgrey', overflow: 'hidden', overflowY: 'scroll', fontFamily: 'monospace', fontSize: '1.2rem' }}>
+      <div className="output-box" style={{ width: '100%', height: '500px', borderBottom: '1px solid lightgrey', overflow: 'hidden', overflowY: 'scroll', fontFamily: 'monospace', fontSize: '1.2rem' }}>
         {/** This is a temporary, hacky solution to keep the grid cell at max size */}
         <div style={{ visibility: 'hidden', height: 0 }}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
         <div style={{ padding: '10px 25px' }}>
