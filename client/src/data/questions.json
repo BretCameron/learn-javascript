@@ -1,5 +1,14 @@
 [
   {
+    "question": "<p>Given an array of integers, create a function <code>evenAndOdd()</code> which returns two arrays: <ul><li>one containing all the even numbers in the original array, and</li><li>one containing all the odd numbers.</li></ul></p><p>For example, given the array <code>[1, 2, 3, 4, 5]</code>, your function should return: <pre><code>[[2, 4], [1, 3, 5]]</code></pre>",
+    "hint": "You might find the modulus operand <code>%</code> useful here!",
+    "initialSolution": "function evenAndOdd(arr) {\n\treturn [arr.filter(el => el % 2 === 0).sort(), arr.filter(el => el % 2 === 1).sort()];\n};",
+    "functionName": "evenAndOdd",
+    "userSolutionString": "const evenAndOdd = (arr) => { return [arr.filter(el => el % 2 === 0).sort(), arr.filter(el => el % 2 === 1).sort()];}",
+    "courseSolutionString": "function evenAndOdd(arr) { return [arr.filter(el => el % 2 === 0).sort(), arr.filter(el => el % 2 === 1).sort()];}",
+    "testFunctionString": "const test = (userSolution, courseSolution, userSolutionString) => { let map = new Map(); for (let i = 0; i < 50; i++) { let randLength = parseInt(Math.random() * 10); let randArray = [...Array(randLength)].map(e => ~~(Math.random() * randLength)); let trueDescription = 'GOT: [[' + courseSolution(randArray)[0] + '], [' + courseSolution(randArray)[1] + ']]' ; let falseDescription = 'CASE: evenAndOdd([' + randArray + '])' + '<br />' + 'EXPECTED: [[' + userSolution(randArray)[0] + '], [' + userSolution(randArray)[1] + ']]' + '<br />' + 'INSTEAD GOT: [[' + courseSolution(randArray)[0] + '], [' + courseSolution(randArray)[1] + ']]' ; let bool = _.isEqual(userSolution(randArray), courseSolution(randArray)); map.set(bool ? trueDescription : falseDescription, bool); } return map; }"
+  },
+  {
     "question": "<p>Define an array of the numbers <code>1, 2 and 3</code> using <code>const</code> and square bracket notation</p>",
     "initialSolution": "",
     "completeSolution": "const arr = [1, 2, 3];",

@@ -1,21 +1,28 @@
 import React from 'react';
+import axios from 'axios';
 
 import Question from '../components/Question';
 import Solution from '../components/Solution';
-import Tests from '../components/Tests';
+// import Tests from '../components/Tests';
+import Tests2 from '../components/Tests2';
 import Modal from '../components/Modal';
 
-import { isEqual } from '../helpers/isEqual';
+// import { isEqual } from '../helpers/isEqual';
 import questions from '../data/questions';
 
 export default class QuestionPage extends React.Component {
   state = {
+    pass: false,
+    tests: [],
     questionNum: 0,
     solution: '',
     result: '',
-    testResults: [],
-    errorMessage: '',
     displayModal: false,
+    tab: 'question-tab'
+  }
+
+  switchTabs = (e) => {
+    this.setState({ tab: e.currentTarget.id });
   }
 
   changeQuestion = (num) => {
@@ -24,8 +31,6 @@ export default class QuestionPage extends React.Component {
         displayModal: false,
         questionNum: num,
         result: '',
-        testResults: [],
-        errorMessage: '',
       }, () => {
         this.updateSolution(questions[num].initialSolution)
       });
@@ -48,12 +53,12 @@ export default class QuestionPage extends React.Component {
   }
 
   run = () => {
-    if (!this.state.testResults.includes(false) && this.state.testResults.length !== 0) {
-      this.changeQuestion(this.state.questionNum + 1);
-      this.setState({ displayModal: false });
-    } else {
-      this.evalCode();
-    }
+    // if (!this.state.testResults.includes(false) && this.state.testResults.length !== 0) {
+    //   this.changeQuestion(this.state.questionNum + 1);
+    //   this.setState({ displayModal: false });
+    // } else {
+    this.evalCode();
+    // }
   }
 
   updateSolution = (str) => {
@@ -61,40 +66,47 @@ export default class QuestionPage extends React.Component {
   }
 
   evalCode = () => {
-    const code = document.getElementById('IDE').innerText.replace(/^([\d\n])+/, '');
-    try {
-      this.setState({
-        // eslint-disable-next-line
-        result: eval(code) || '',
-        errorMessage: ''
-      }, () => this.runTests())
-    } catch (e) {
-      if (e.message) this.setState({ errorMessage: e.message });
-    }
+    const { solution, questionNum } = this.state;
+    const { functionName, courseSolutionString, testFunctionString } = questions[questionNum];
+
+    axios.post('/evaluate/submit', {
+      functionName,
+      userSolutionString: String(solution),
+      courseSolutionString,
+      testFunctionString,
+    })
+      .then(res => {
+        const { pass, tests } = res.data;
+        this.setState({ pass, tests, tab: 'tests-tab' }, () => console.log(this.state));
+      })
   }
 
   runTests = () => {
-    const { questionNum, solution, result } = this.state;
-    const { testCases } = questions[questionNum];
-    const testResults = [];
 
-    testCases.forEach((el, i) => {
-      // eslint-disable-next-line
-      const test = new Function(['solution', 'result', 'isEqual'], el.function);
-      testResults.push(test(solution, result, isEqual))
-    });
+  };
 
-    this.setState({ testResults }, () => {
-      if (this.state.testResults.includes(false) && !this.state.errorMessage) this.setState({ errorMessage: 'To progress, you need to complete all the tests.' });
-      if (this.state.testResults.length > 0 && !this.state.testResults.includes(false)) {
-        this.setState({ displayModal: true })
-      }
-    })
-  }
+  // runTests = () => {
+  //   const { questionNum, solution, result } = this.state;
+  //   const { testCases } = questions[questionNum];
+  //   const testResults = [];
+
+  //   testCases.forEach((el, i) => {
+  //     // eslint-disable-next-line
+  //     const test = new Function(['solution', 'result', 'isEqual'], el.function);
+  //     testResults.push(test(solution, result, isEqual))
+  //   });
+
+  //   this.setState({ testResults }, () => {
+  //     if (this.state.testResults.includes(false) && !this.state.errorMessage) this.setState({ errorMessage: 'To progress, you need to complete all the tests.' });
+  //     if (this.state.testResults.length > 0 && !this.state.testResults.includes(false)) {
+  //       this.setState({ displayModal: true })
+  //     }
+  //   })
+  // }
 
   render() {
-    const { questionNum, result, errorMessage, testResults, solution } = this.state;
-    const { question, initialSolution, completeSolution, testCases, hint } = questions[questionNum];
+    const { questionNum, result, tests, solution } = this.state;
+    const { question, initialSolution, hint } = questions[questionNum];
     return (
       <>
         {this.state.displayModal ? <Modal
@@ -110,36 +122,49 @@ export default class QuestionPage extends React.Component {
             <hr />
           </div>
 
-          <div>
-            <Question
-              questionNum={questionNum}
-              question={question}
-              hint={hint}
-            />
+          <div style={{
+            height: '100%',
+            gridRow: '2 / 4'
+          }}>
+            <div>
+              <ul className="tabs">
+                <li id="question-tab" onClick={this.switchTabs} className={this.state.tab === "question-tab" ? "selected" : ""}><h2>Question</h2></li>
+                <li id="tests-tab" onClick={this.switchTabs} className={this.state.tab === "tests-tab" ? "selected" : ""}><h2>Tests</h2></li>
+              </ul>
+            </div>
+            <div style={{
+              minHeight: 'calc(100% - 170px)'
+            }}>
+              {this.state.tab === "question-tab" ? <Question
+                questionNum={questionNum}
+                question={question}
+                hint={hint}
+              /> : <Tests2
+                  tests={tests}
+                />}
+            </div>
+
           </div>
 
           <div className="ide-grid">
             <Solution
               id="IDE"
               initialSolution={initialSolution}
-              completeSolution={completeSolution}
               run={this.run}
               result={result}
-              errorMessage={errorMessage}
               updateSolution={this.updateSolution}
               solution={solution}
-              testResults={testResults}
             />
           </div>
 
-          <div style={{
+          {/* <div style={{
             marginBottom: '50px'
-          }}>
-            <Tests
+          }}> */}
+          {/* <Tests
               testCases={testCases}
               testResults={testResults}
-            />
-          </div>
+            /> */}
+          {/* </div> */}
 
         </div>
       </>

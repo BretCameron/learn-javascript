@@ -28,6 +28,7 @@ mongoose
 const cacheTime = 86400000 * 30 // the time you want
 removeUnusedImages();
 
+app.use('/evaluate', require('./routes/api/evaluate'));
 app.use('/courses', require('./routes/api/courses'));
 app.use('/images', require('./routes/api/images'));
 app.use('/course-images', express.static(path.join(__dirname, '/static/courseImages'), { maxAge: cacheTime }));

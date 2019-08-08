@@ -6,6 +6,7 @@ import './App.scss';
 import store from './store';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import TestsPage from './pages/TestsPage';
 import QuestionPage from './pages/QuestionPage';
 import CoursePage from './pages/CoursePage';
 import CoursesBrowsePage from './pages/CoursesBrowsePage';
@@ -29,6 +30,7 @@ class App extends React.Component {
                 <Route path="/" exact component={CoursesBrowsePage} />
                 <Route path="/courses" exact component={CoursesBrowsePage} />
                 <Route path="/question" exact component={QuestionPage} />
+                <Route path="/tests" exact component={TestsPage} />
                 <Route path="/courses/create" exact component={CourseCreatePage} />
                 <Route path="/courses/edit/:courseId" exact component={CourseEditPage} />
                 <Route path="/courses/:courseId" exact component={CoursePage} />

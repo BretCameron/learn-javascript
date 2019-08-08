@@ -57,7 +57,6 @@ export const createCourse = (course) => {
       error => console.log(error)
     );
   };
-
 }
 
 // export const createCourse = (course) => dispatch => {

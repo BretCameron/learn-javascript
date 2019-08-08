@@ -91,6 +91,39 @@ a {
   }
 }
 
+.tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  // border: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  li {
+    display: inline-block;
+    padding: 15px 10px;
+    margin: 0 0 0 0;
+    min-width: 50px;
+    text-align: left;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    cursor: pointer;
+    color: lightgrey;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  li:first-of-type {
+    border-right: none;
+  }
+
+  li.selected {
+    color: #000;
+  }
+}
+
 .modal-background {
   position: fixed;
   top: 0;
@@ -353,8 +386,8 @@ textarea {
   margin: 5px 0;
   /* border-radius: 5px; */
   box-shadow: 0 0 2px green;
-  padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
+  padding: 3px 20 3px 3px;
+  margin: 5px 1px 3px 20;
   border: 1px solid green;
   outline: none;
 }

@@ -29,7 +29,7 @@ export default class Solution extends Component {
     return (
       <div>
         <div style={{ height: '100%' }}>
-          <h2>Solution</h2>
+          {/* <h2>Solution</h2> */}
           <AceEditor
             ref={this.editorRef}
             mode="java"
@@ -40,11 +40,12 @@ export default class Solution extends Component {
             style={{
               width: '100%',
               maxWidth: '700px',
-              border: this.props.testResults.length > 0 && !this.props.testResults.includes(false) ? '2px solid green' : '2px solid lightgrey',
+              border: '2px solid lightgrey',
               fontSize: `1rem`,
               boxSizing: 'border-box'
             }}
             value={this.props.solution}
+            wrapEnabled={true}
           >
           </AceEditor>
           <button className="mainButton" type="button" onClick={this.props.run}>Run Code</button>
@@ -52,7 +53,7 @@ export default class Solution extends Component {
           <p style={{
             fontFamily: 'monospace', fontSize: '1.2rem', color:
               this.props.errorMessage ? 'red' : 'black'
-          }}>{this.props.errorMessage ? 'Error message: ' + this.props.errorMessage : ''}</p>
+          }}>{this.props.result ? this.props.result : ''}</p>
         </div >
       </div >
     )
