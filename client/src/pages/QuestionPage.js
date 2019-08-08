@@ -54,19 +54,29 @@ export default class QuestionPage extends React.Component {
   }
 
   run = () => {
-    // if (!this.state.testResults.includes(false) && this.state.testResults.length !== 0) {
-    //   this.changeQuestion(this.state.questionNum + 1);
-    //   this.setState({ displayModal: false });
-    // } else {
-    this.evalCode();
-    // }
+    if (this.state.pass && !this.state.displayModal) {
+      this.setState({ displayModal: true });
+    } else if (this.state.pass && this.state.displayModal) {
+      this.changeQuestion(this.state.questionNum + 1);
+      this.setState({
+        pass: false,
+        tests: [],
+        solution: '',
+        result: '',
+        displayModal: false,
+        tab: 'question-tab',
+        summary: {},
+      });
+    } else if (!this.state.pass) {
+      this.evalCode();
+    }
   }
 
   updateSolution = (str) => {
     this.setState({ solution: str })
   }
 
-  evalCode = () => {
+  evalCode = async () => {
     const { solution, questionNum } = this.state;
     const { functionName, courseSolutionString, testFunctionString } = questions[questionNum];
 

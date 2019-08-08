@@ -13,6 +13,10 @@ code {
   background: rgb(228, 228, 228);
 }
 
+pre {
+  background: rgb(228, 228, 228);
+}
+
 a {
   text-decoration: none;
 }
@@ -22,7 +26,6 @@ a {
   padding: 0 20px;
   margin: 0 auto;
   max-width: 1000px;
-  /* background: #eee; */
 }
 
 .layout-grid {
@@ -73,8 +76,18 @@ a {
   }
 
   .course-grid {
+    // display: block;
     grid-template-columns: 1fr;
     /* grid-template-rows: auto auto auto auto auto; */
+  }
+
+  #IDE {
+    margin-bottom: 10px;
+  }
+
+  #question-box,
+  .output-box {
+    max-height: 300px;
   }
 
   .layout-grid {
