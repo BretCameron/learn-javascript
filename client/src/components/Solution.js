@@ -26,6 +26,7 @@ export default class Solution extends Component {
   }
 
   render() {
+    const { pass } = this.props;
     return (
       <div>
         <div style={{ height: '100%' }}>
@@ -48,7 +49,7 @@ export default class Solution extends Component {
             wrapEnabled={true}
           >
           </AceEditor>
-          <button className="mainButton" type="button" onClick={this.props.run}>Run Code</button>
+          <button className={pass ? "mainButton grn" : "mainButton"} type="button" onClick={this.props.run}>{pass ? 'Submit Code' : 'Run Solution'}</button>
           <button className="secondaryButton" type="button" onClick={this.reset}>Reset</button>
           <p style={{
             fontFamily: 'monospace', fontSize: '1.2rem', color:

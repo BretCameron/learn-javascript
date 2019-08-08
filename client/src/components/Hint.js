@@ -13,19 +13,20 @@ export default class Hint extends Component {
     const { hint } = this.props;
     return (
       <div style={{
-        border: '1px solid grey',
+        border: '1px solid lightgrey',
         borderRadius: '5px',
-        background: '#EEE',
+        background: '#eee',
+        color: '#444',
         cursor: 'pointer',
         display: hint ? 'block' : 'none',
-        marginBottom: '10px'
+        margin: '20px 0'
       }} onClick={this.openHint}>
         <div style={{ padding: '8px 12px' }}>
           Hint
         </div>
         <div style={{
           display: this.state.open ? 'block' : 'none',
-          borderTop: '1px solid grey',
+          borderTop: '1px solid lightgrey',
           background: 'white',
           borderRadius: '0 0 5px 5px'
         }}>

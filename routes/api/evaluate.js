@@ -68,7 +68,12 @@ router.post('/submit', (req, res) => {
       tests: testResult
     });
   } catch (err) {
-    res.send(String(err));
+    res.json({
+      pass: false,
+      summary: null,
+      tests: null,
+      message: String(err)
+    });
   };
 
 });

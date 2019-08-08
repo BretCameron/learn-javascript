@@ -17,7 +17,7 @@ export default class Hero extends Component {
             padding: '40px 0 0 0',
             fontSize: '3rem',
             color: '#FFF'
-          }}>Learn to Code</h1>
+          }}>Learn to Code Web Apps</h1>
           <h2 style={{
             marginTop: 0,
             fontWeight: '100',

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Question from '../components/Question';
 import Solution from '../components/Solution';
 // import Tests from '../components/Tests';
-import Tests2 from '../components/Tests2';
+import Tests from '../components/Tests';
 import Modal from '../components/Modal';
 
 // import { isEqual } from '../helpers/isEqual';
@@ -77,36 +77,13 @@ export default class QuestionPage extends React.Component {
       testFunctionString,
     })
       .then(res => {
-        const { pass, tests, summary } = res.data;
-        this.setState({ pass, tests, summary, tab: 'tests-tab' }, () => console.log(this.state));
+        const { pass, tests, summary, message } = res.data;
+        this.setState({ pass, tests, summary, message, tab: 'tests-tab' }, () => console.log(this.state));
       })
   }
 
-  runTests = () => {
-
-  };
-
-  // runTests = () => {
-  //   const { questionNum, solution, result } = this.state;
-  //   const { testCases } = questions[questionNum];
-  //   const testResults = [];
-
-  //   testCases.forEach((el, i) => {
-  //     // eslint-disable-next-line
-  //     const test = new Function(['solution', 'result', 'isEqual'], el.function);
-  //     testResults.push(test(solution, result, isEqual))
-  //   });
-
-  //   this.setState({ testResults }, () => {
-  //     if (this.state.testResults.includes(false) && !this.state.errorMessage) this.setState({ errorMessage: 'To progress, you need to complete all the tests.' });
-  //     if (this.state.testResults.length > 0 && !this.state.testResults.includes(false)) {
-  //       this.setState({ displayModal: true })
-  //     }
-  //   })
-  // }
-
   render() {
-    const { questionNum, result, tests, solution, summary } = this.state;
+    const { questionNum, result, tests, solution, summary, message, pass } = this.state;
     const { question, initialSolution, hint } = questions[questionNum];
     return (
       <>
@@ -127,22 +104,40 @@ export default class QuestionPage extends React.Component {
             height: '100%',
             gridRow: '2 / 4'
           }}>
-            <div>
+            <div style={{
+              position: 'relative'
+            }}>
               <ul className="tabs">
-                <li id="question-tab" onClick={this.switchTabs} className={this.state.tab === "question-tab" ? "selected" : ""}><h2>Question</h2></li>
-                <li id="tests-tab" onClick={this.switchTabs} className={this.state.tab === "tests-tab" ? "selected" : ""}><h2>Tests</h2></li>
+                <div>
+                  <li id="question-tab" onClick={this.switchTabs} className={this.state.tab === "question-tab" ? "selected" : ""}><h3>Question {questionNum + 1}</h3>
+                  </li>
+                  <div style={{
+                    background: '#FFF',
+                    position: 'absolute',
+                    bottom: '-10px',
+                    width: 'calc(100% - 30px)',
+                    height: '10px'
+                  }}></div>
+                </div>
+                <div>
+                  <li id="tests-tab" onClick={this.switchTabs} className={this.state.tab === "tests-tab" ? "selected" : ""}><h3>Output</h3></li>
+                </div>
               </ul>
             </div>
             <div style={{
-              minHeight: 'calc(100% - 170px)'
+              minHeight: '500px',
+              // border: '1px solid lightgrey',
+              boxShadow: '2px 2px 7px rgba(0,0,0,0.3)',
+              marginBottom: '20px',
             }}>
               {this.state.tab === "question-tab" ? <Question
                 questionNum={questionNum}
                 question={question}
                 hint={hint}
-              /> : <Tests2
+              /> : <Tests
                   tests={tests}
                   summary={summary}
+                  message={message}
                 />}
             </div>
 
@@ -154,6 +149,7 @@ export default class QuestionPage extends React.Component {
               initialSolution={initialSolution}
               run={this.run}
               result={result}
+              pass={pass}
               updateSolution={this.updateSolution}
               solution={solution}
             />

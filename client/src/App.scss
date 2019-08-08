@@ -10,6 +10,7 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  background: rgb(228, 228, 228);
 }
 
 a {
@@ -37,10 +38,10 @@ a {
   display: grid;
   grid-column: 1 / -1;
   /* width: 100%; */
-  grid-template-columns: 5fr 7fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   /* min-height: 100vh; */
-  grid-column-gap: 40px;
+  grid-column-gap: 30px;
   padding: 0 20px;
   max-width: 1000px;
   margin: 0 auto;
@@ -97,20 +98,21 @@ a {
   margin: 0;
   // border: none;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 30px;
+  grid-column-gap: 3px;
 
   li {
+    padding: 10px 20px;
+    min-width: 100px;
+    width: calc(100% - 40px);
     display: inline-block;
-    padding: 15px 10px;
-    margin: 0 0 0 0;
-    min-width: 50px;
     text-align: left;
-    border-top: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
+    border-radius: 15px 15px 0 0;
+    background: #eee;
     cursor: pointer;
-    color: lightgrey;
+    color: darkgrey;
 
-    h2 {
+    h3 {
       margin: 0;
     }
   }
@@ -121,6 +123,11 @@ a {
 
   li.selected {
     color: #000;
+    background: #fff;
+    // border: 1px solid lightgrey;
+    border-bottom: none;
+    outline: 0px solid white;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -168,6 +175,12 @@ a {
   padding: 10px 16px;
   margin: 5px 5px 0 0;
   cursor: pointer;
+  transition: 200ms ease-out;
+}
+
+.mainButton.grn {
+  background: rgb(28, 148, 28);
+  border: 2px solid rgb(0, 109, 0);
 }
 
 input[type='submit'] {
@@ -395,7 +408,7 @@ textarea {
 .course-create-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 25px 40px;
+  grid-gap: 25px 50px;
 }
 
 // Loader
