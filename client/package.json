@@ -8,7 +8,7 @@
     "draft-js": "^0.11.0",
     "draft-js-export-html": "^1.4.1",
     "draft-js-import-html": "^1.4.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "react": "^16.8.6",
     "react-ace": "^7.0.2",
     "react-dom": "^16.8.6",
